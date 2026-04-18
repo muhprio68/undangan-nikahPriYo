@@ -451,10 +451,18 @@ function openFullView(src) {
     const overlay = document.getElementById('fullViewOverlay');
     const fullImg = document.getElementById('fullViewImg');
     
-    // Cari index berdasarkan src yang diklik
-    currentImgIndex = galleryImages.indexOf(src);
-    
-    fullImg.src = src;
+    // Ambil cuma nama filenya aja (misal: priyo1.jpg) biar gak pusing sama folder/domain
+    const fileName = src.split('/').pop();
+
+    // Cari di array galleryImages mana yang punya nama file tersebut
+    const foundIndex = galleryImages.findIndex(img => img.includes(fileName));
+
+    if (foundIndex !== -1) {
+        currentImgIndex = foundIndex;
+    }
+
+    // Tampilkan foto sesuai index yang beneran diklik
+    fullImg.src = galleryImages[currentImgIndex];
     overlay.style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
