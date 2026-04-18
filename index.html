@@ -29,7 +29,7 @@
             background-color: var(--warna-kertas);
         }
 
-        h1, h2, h3, h4, .font-elegan { font-family: 'Cormorant Garamond', serif; }
+        h1, h2, h3, h4, .font-elegan { font-family: 'Cormorant Garamond', serif; line-height: 1.6;}
 
         /* ================= COVER ================= */
         #cover-screen {
@@ -80,6 +80,20 @@
             background: white;
         }
 
+        /* --- GANTI BINGKAI FOTO PROFIL JADI OVAL --- */
+.foto-profil-oval {
+    width: 130px; /* Lebar lebih kecil */
+    height: 200px; /* Tinggi lebih besar */
+    object-fit: cover; /* Jaga proporsi foto di dalam */
+    border-radius: 100px; /* Nilai radius besar di semua sudut */
+    border: 3px solid var(--warna-aksen);
+    margin: 0 auto 20px auto; /* Centering dan jarak bawah */
+    display: block; /* Agar centering margin auto jalan */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Tipis-tipis biar ada dimensi */
+    position: relative;
+    z-index: 20;
+}
+
         .buka-transisi { transform: translateY(-100%); opacity: 0; }
 
         /* ================= ISI UNDANGAN ================= */
@@ -89,6 +103,8 @@
             background-color: var(--warna-kertas);
             z-index: 1;
         }
+
+        #isi-undangan section:first-of-type { margin-bottom: 50px; }
 
         .bg-bunga-atas {
             position: fixed;
@@ -121,17 +137,8 @@
             z-index: 20;
         }
 
-        .foto-zoom-prio {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: 100% 20%; 
-        }
-
-        .foto-zoom-hana {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: 100% 20%; 
-        }
+        .foto-zoom-prio { width: 100%; height: 100%; object-fit: cover; object-position: 100% 20%; }
+        .foto-zoom-hana { width: 100%; height: 100%; object-fit: cover; object-position: 100% 20%; }
 
         .card-custom {
             background-color: rgba(255, 255, 255, 0.85);
@@ -154,102 +161,73 @@
             transition: 0.3s;
         }
         
-
-        .galeri-img:hover { 
-            transform: scale(1.02);
-            filter: brightness(0.8); 
-        }
+        .galeri-img:hover { transform: scale(1.02); filter: brightness(0.8); }
 
         .fullview-overlay {
-    display: none;
-    position: fixed;
-    z-index: 10000; /* Harus di atas segalanya */
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(5px);
-    cursor: zoom-out;
-}
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+            cursor: zoom-out;
+        }
 
-/* Container untuk menjaga rasio */
-.fullview-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-}
+        .fullview-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%; height: 100%;
+            padding: 20px;
+        }
 
-/* Fotonya: Maksimal setinggi layar, lebar otomatis menyesuaikan */
-#fullViewImg {
-    max-width: 100%;
-    max-height: 90vh; /* Maksimal 90% tinggi layar biar gak kepotong */
-    object-fit: contain; /* Jaga rasio foto */
-    border-radius: 4px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    transition: transform 0.3s ease; /* Biar transisi zoom halus */
-}
+        #fullViewImg {
+            max-width: 100%; max-height: 90vh;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
 
-/* Tombol Close */
-.close-fullview {
-    position: absolute;
-    top: 20px; right: 35px;
-    color: #fff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10001;
-}
+        .close-fullview {
+            position: absolute;
+            top: 20px; right: 35px;
+            color: #fff; font-size: 40px; font-weight: bold;
+            cursor: pointer; z-index: 10001;
+        }
 
-/* Tombol Navigasi */
-.nav-prev, .nav-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    padding: 15px 20px;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 10002;
-    transition: 0.3s;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .nav-prev, .nav-next {
+            position: absolute; top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none; color: white;
+            padding: 15px 20px; cursor: pointer;
+            border-radius: 50%; z-index: 10002;
+            transition: 0.3s; font-size: 1.5rem;
+            display: flex; align-items: center; justify-content: center;
+        }
 
-.nav-prev:hover, .nav-next:hover {
-    background: rgba(255, 255, 255, 0.4);
-}
+        .nav-prev:hover, .nav-next:hover { background: rgba(255, 255, 255, 0.4); }
+        .nav-prev { left: 20px; }
+        .nav-next { right: 20px; }
 
-.nav-prev { left: 20px; }
-.nav-next { right: 20px; }
-
-/* Sembunyikan navigasi di layar sangat kecil biar gak ganggu foto */
-@media (max-width: 576px) {
-    .nav-prev { left: 10px; padding: 10px 15px; }
-    .nav-next { right: 10px; padding: 10px 15px; }
-}
+        @media (max-width: 576px) {
+            .nav-prev { left: 10px; padding: 10px 15px; }
+            .nav-next { right: 10px; padding: 10px 15px; }
+        }
 
         .btn-vintage {
             background-color: var(--warna-aksen);
-            color: white;
-            border: none;
-            padding: 10px 28px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            color: white; border: none;
+            padding: 10px 28px; border-radius: 50px;
+            font-size: 0.9rem; letter-spacing: 1px;
             transition: 0.3s;
         }
         
         hr.divider-vintage {
-            width: 50px;
-            border-top: 2px solid var(--warna-aksen);
-            opacity: 1;
-            margin: 15px auto 25px auto;
+            width: 50px; border-top: 2px solid var(--warna-aksen);
+            opacity: 1; margin: 15px auto 25px auto;
         }
     </style>
 </head>
@@ -278,20 +256,32 @@
         <img src="assets/img/bunga-sudut.png" alt="Bunga" class="bg-bunga-atas">
         <img src="assets/img/bunga-sudut.png" alt="Bunga" class="bg-bunga-bawah">
 
-        <section class="container text-center py-5 mt-4">
+        <section class="container text-center py-5 mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 card-custom p-5 border-0 shadow-none bg-transparent" data-aos="fade-up">
+                    <i class="bi bi-heart-fill mb-3" style="color: var(--warna-aksen); opacity: 0.5;"></i>
+                    <h3 class="font-elegan mb-4" style="font-style: italic;">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."</h3>
+                    <p class="fw-bold text-uppercase" style="letter-spacing: 2px; font-size: 0.8rem;">— QS. Ar-Rum: 21</p>
+                    <hr class="divider-vintage mt-4">
+                </div>
+            </div>
+        </section>
+
+        <section class="container text-center py-5">
             <div data-aos="fade-up">
                 <h2 class="font-elegan display-5 mb-2">Assalamu'alaikum Wr. Wb.</h2>
                 <hr class="divider-vintage">
-                <p class="px-3" style="font-weight: 400; line-height: 1.8; font-size: 0.95rem;">
-                    Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i<br>untuk hadir di hari bahagia kami.
+                <p class="px-3 mt-3" style="font-weight: 400; line-height: 1.8; font-size: 0.95rem;">
+                    Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan.<br>
+                    Ya Allah, perkenankanlah kami merangkaikan kasih sayang yang Kau ciptakan dalam ikatan pernikahan:
                 </p>
             </div>
 
             <div class="row mt-5 g-4 justify-content-center align-items-center">
                 <div class="col-md-5" data-aos="fade-up">
-                    <div class="bingkai-bulat shadow-sm mb-3">
-                        <img src="assets/img/prio.jpg" class="foto-zoom-prio">
-                    </div>
+                    
+                        <img src="assets/img/ppprio.jpg" class="foto-profil-oval">
+                    
                     <h3 class="font-elegan h2 fw-bold">Muhammad Prio Agustian, S.Kom.</h3>
                     <p class="small mb-2">Putra dari Bapak Muhadi & Ibu Minal Khoirot</p>
                     <a href="https://www.instagram.com/muhprio_/" target="_blank" class="text-decoration-none" style="color: var(--warna-aksen);"><i class="bi bi-instagram"></i> @muhprio_</a>
@@ -300,12 +290,18 @@
                     <span class="display-2 font-elegan" style="color: var(--warna-aksen); opacity: 0.5;">&</span>
                 </div>
                 <div class="col-md-5" data-aos="fade-up" data-aos-delay="200">
-                    <div class="bingkai-bulat shadow-sm mb-3">
-                        <img src="assets/img/hana.jpg" class="foto-zoom-hana">
-                    </div>
+                    <img src="assets/img/pphana.jpg" class="foto-profil-oval">
                     <h3 class="font-elegan h2 fw-bold">Yohana Viliam Comandani, Amd.Gz.</h3>
                     <p class="small mb-2">Putri dari Bapak Parto & Ibu Supranti</p>
                     <a href="https://www.instagram.com/hanacomandani/" target="_blank" class="text-decoration-none" style="color: var(--warna-aksen);"><i class="bi bi-instagram"></i> @hanacomandani</a>
+                </div>
+            </div>
+
+            <div class="row mt-5 justify-content-center" data-aos="fade-up">
+                <div class="col-md-8">
+                    <p class="px-3" style="font-weight: 400; line-height: 1.8; font-size: 0.95rem;">
+                        Tanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada acara pernikahan kami:
+                    </p>
                 </div>
             </div>
         </section>
@@ -314,7 +310,7 @@
             <h2 class="font-elegan display-5 mb-2" data-aos="fade-up">Waktu & Tempat</h2>
             <hr class="divider-vintage" data-aos="fade-up">
             <div class="row g-4 justify-content-center mt-3">
-                <div class="col-md-5" data-aos="fade-up">
+                <div class="col-md-4" data-aos="fade-up">
                     <div class="card-custom">
                         <h4 class="font-elegan fw-bold mb-3">Akad Nikah</h4>
                         <p class="mb-1 fw-bold">Minggu, 07 Juni 2026</p>
@@ -324,51 +320,50 @@
                         <a href="#" target="_blank" class="btn btn-outline-dark btn-sm rounded-pill px-4"><i class="bi bi-geo-alt"></i> Buka Peta</a>
                     </div>
                 </div>
-                <div class="col-md-5" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-custom">
                         <h4 class="font-elegan fw-bold mb-3">Resepsi</h4>
                         <p class="mb-1 fw-bold">Minggu, 07 Juni 2026</p>
-                        <p class="small mb-4">01.00 - 17.00 WIB</p>
+                        <p class="small mb-4">01.00 - Selesai WIB</p>
                         <p class="mt-3 mb-0 fw-semibold">Kediaman Mempelai Wanita</p>
                         <p class="small mb-4">Dsn. Cangak, Ngusikan, Jombang</p>
                         <a href="#" target="_blank" class="btn btn-outline-dark btn-sm rounded-pill px-4"><i class="bi bi-geo-alt"></i> Buka Peta</a>
                     </div>
                 </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-custom">
+                        <h4 class="font-elegan fw-bold mb-3">Unduh Mantu</h4>
+                        <p class="mb-1 fw-bold">Senin, 08 Juni 2026</p>
+                        <p class="small mb-4">12.00 WIB - Selesai</p>
+                        <p class="mt-3 mb-0 fw-semibold">Kediaman Mempelai Pria</p>
+                        <p class="small mb-4">Dsn. Jogoloyo, Sumobito, Jombang</p>
+                        <a href="https://maps.app.goo.gl/yK6KZNW3LE4e4WEAA" target="_blank" class="btn btn-outline-dark btn-sm rounded-pill px-4"><i class="bi bi-geo-alt"></i> Buka Peta</a>
+                    </div>
+                </div>
             </div>
         </section>
 
-       <section class="container py-5 text-center">
-    <h2 class="font-elegan display-5 mb-2" data-aos="fade-up">Momen Bahagia</h2>
-    <hr class="divider-vintage" data-aos="fade-up">
-    <div class="row g-3 mt-3 justify-content-center">
-        <div class="col-6 col-md-4" data-aos="zoom-in">
-            <img src="assets/img/priyo1.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)">
-        </div>
-        <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="100">
-            <img src="assets/img/priyo2.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)">
-        </div>
-        <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="200">
-            <img src="assets/img/priyo3.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)">
-        </div>
-        <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="300">
-            <img src="assets/img/priyo4.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)">
-        </div>
-        <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="400">
-            <img src="assets/img/priyo5.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)">
-        </div>
-    </div>
-</section>
+        <section class="container py-5 text-center">
+            <h2 class="font-elegan display-5 mb-2" data-aos="fade-up">Momen Bahagia</h2>
+            <hr class="divider-vintage" data-aos="fade-up">
+            <div class="row g-3 mt-3 justify-content-center">
+                <div class="col-6 col-md-4" data-aos="zoom-in"><img src="assets/img/priyo1.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
+                <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="100"><img src="assets/img/priyo2.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
+                <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="200"><img src="assets/img/priyo3.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
+                <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="300"><img src="assets/img/priyo4.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
+                <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="400"><img src="assets/img/priyo5.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
+            </div>
+        </section>
 
-<div id="fullViewOverlay" class="fullview-overlay">
-    <span class="close-fullview" onclick="closeFullView()">&times;</span>
-    
-    <button class="nav-prev" onclick="changeImg(-1)"><i class="bi bi-chevron-left"></i></button>
-    <button class="nav-next" onclick="changeImg(1)"><i class="bi bi-chevron-right"></i></button>
+        <div id="fullViewOverlay" class="fullview-overlay">
+            <span class="close-fullview" onclick="closeFullView()">&times;</span>
+            <button class="nav-prev" onclick="changeImg(-1)"><i class="bi bi-chevron-left"></i></button>
+            <button class="nav-next" onclick="changeImg(1)"><i class="bi bi-chevron-right"></i></button>
+            <div class="fullview-container" onclick="closeFullView()">
+                <img id="fullViewImg" src="" onclick="event.stopPropagation()">
+            </div>
+        </div>
 
-    <div class="fullview-container" onclick="closeFullView()">
-        <img id="fullViewImg" src="" onclick="event.stopPropagation()">
-    </div>
-</div>
         <section class="container py-5 text-center">
             <div class="card-custom mx-auto" style="max-width: 500px;" data-aos="fade-up">
                 <h2 class="font-elegan display-6 mb-2">Wedding Gift</h2>
@@ -390,12 +385,8 @@
                     <hr class="divider-vintage">
                     <div class="card-custom text-start mb-4 mt-3">
                         <form id="commentForm" class="mb-4 pb-4 border-bottom">
-                            <div class="mb-3">
-                                <input type="text" class="form-control bg-light border-0" placeholder="Nama Lengkap" required>
-                            </div>
-                            <div class="mb-3">
-                                <textarea class="form-control bg-light border-0" rows="3" placeholder="Tulis ucapan selamat..." required></textarea>
-                            </div>
+                            <div class="mb-3"><input type="text" class="form-control bg-light border-0" placeholder="Nama Lengkap" required></div>
+                            <div class="mb-3"><textarea class="form-control bg-light border-0" rows="3" placeholder="Tulis ucapan selamat..." required></textarea></div>
                             <button type="submit" class="btn btn-vintage w-100 m-0">Kirim Pesan</button>
                         </form>
                         <div id="commentList" style="max-height: 250px; overflow-y: auto;">
@@ -425,75 +416,56 @@
         AOS.init({ duration: 1000, once: true });
         const btnBuka = document.getElementById('btn-buka');
         const music = document.getElementById('bg-music');
+        
         btnBuka.addEventListener('click', () => {
             music.play();
             document.getElementById('cover-screen').classList.add('buka-transisi');
             document.getElementById('isi-undangan').style.display = 'block';
             document.body.style.overflow = 'auto';
-            
             setTimeout(() => { 
                 document.getElementById('cover-screen').style.display = 'none'; 
                 AOS.refresh(); 
             }, 1200);
         });
+
         function copyText(val) { navigator.clipboard.writeText(val); alert("Nomor rekening berhasil disalin!"); }
-       let currentImgIndex = 0;
-// Daftar semua foto galeri (sesuaikan nama file)
-const galleryImages = [
-    'assets/img/priyo1.jpg',
-    'assets/img/priyo2.jpg',
-    'assets/img/priyo3.jpg',
-    'assets/img/priyo4.jpg',
-    'assets/img/priyo5.jpg'
-];
 
-function openFullView(src) {
-    const overlay = document.getElementById('fullViewOverlay');
-    const fullImg = document.getElementById('fullViewImg');
-    
-    // Ambil cuma nama filenya aja (misal: priyo1.jpg) biar gak pusing sama folder/domain
-    const fileName = src.split('/').pop();
+        let currentImgIndex = 0;
+        const galleryImages = [
+            'assets/img/priyo1.jpg', 'assets/img/priyo2.jpg', 'assets/img/priyo3.jpg', 'assets/img/priyo4.jpg', 'assets/img/priyo5.jpg'
+        ];
 
-    // Cari di array galleryImages mana yang punya nama file tersebut
-    const foundIndex = galleryImages.findIndex(img => img.includes(fileName));
+        function openFullView(src) {
+            const overlay = document.getElementById('fullViewOverlay');
+            const fullImg = document.getElementById('fullViewImg');
+            const fileName = src.split('/').pop();
+            const foundIndex = galleryImages.findIndex(img => img.includes(fileName));
+            if (foundIndex !== -1) { currentImgIndex = foundIndex; }
+            fullImg.src = galleryImages[currentImgIndex];
+            overlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
 
-    if (foundIndex !== -1) {
-        currentImgIndex = foundIndex;
-    }
+        function closeFullView() {
+            document.getElementById('fullViewOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
-    // Tampilkan foto sesuai index yang beneran diklik
-    fullImg.src = galleryImages[currentImgIndex];
-    overlay.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
+        function changeImg(direction) {
+            currentImgIndex += direction;
+            if (currentImgIndex >= galleryImages.length) { currentImgIndex = 0; } 
+            else if (currentImgIndex < 0) { currentImgIndex = galleryImages.length - 1; }
+            document.getElementById('fullViewImg').src = galleryImages[currentImgIndex];
+        }
 
-function closeFullView() {
-    document.getElementById('fullViewOverlay').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-function changeImg(direction) {
-    currentImgIndex += direction;
-    
-    // Looping index: kalau habis balik ke awal, kalau awal mundur balik ke akhir
-    if (currentImgIndex >= galleryImages.length) {
-        currentImgIndex = 0;
-    } else if (currentImgIndex < 0) {
-        currentImgIndex = galleryImages.length - 1;
-    }
-    
-    document.getElementById('fullViewImg').src = galleryImages[currentImgIndex];
-}
-
-// Navigasi pakai Keyboard (Panah Kanan/Kiri & ESC)
-document.addEventListener('keydown', function(e) {
-    const overlay = document.getElementById('fullViewOverlay');
-    if (overlay.style.display === 'block') {
-        if (e.key === "ArrowRight") changeImg(1);
-        if (e.key === "ArrowLeft") changeImg(-1);
-        if (e.key === "Escape") closeFullView();
-    }
-});
+        document.addEventListener('keydown', function(e) {
+            const overlay = document.getElementById('fullViewOverlay');
+            if (overlay.style.display === 'block') {
+                if (e.key === "ArrowRight") changeImg(1);
+                if (e.key === "ArrowLeft") changeImg(-1);
+                if (e.key === "Escape") closeFullView();
+            }
+        });
     </script>
 </body>
 </html>
