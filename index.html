@@ -62,7 +62,7 @@
         .buka-transisi { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 
         /* ================= ISI UNDANGAN ================= */
-        #isi-undangan { display: none; position: relative; }
+        #isi-undangan { display: none; position: relative; overflow-x: hidden; }
 
         section { padding: 80px 0; position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
 
@@ -102,7 +102,8 @@
         #fullViewImg { max-width: 90%; max-height: 85vh; object-fit: contain; }
 
         .music-control { position: fixed; bottom: 25px; right: 25px; z-index: 1000; background: var(--warna-aksen); color: white; border-radius: 50%; width: 50px; height: 50px; display: none; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .spin { animation: rotate 3s linear infinite; }
+        .spin { animation: rotate 3s linear infinite; display: inline-block;
+            transform-origin: center center; /* Biar muternya pas di tengah */}
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         .btn-vintage { background-color: var(--warna-aksen); color: white; border: none; padding: 10px 28px; border-radius: 50px; transition: 0.3s; }
