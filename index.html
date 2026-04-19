@@ -20,32 +20,15 @@
             --warna-aksen: #8C9A83;  
         }
 
-        /* --- SISTEM SCROLL HYBRID --- */
-        @media (min-width: 992px) {
-            html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
-            section { scroll-snap-align: start; height: 100vh; }
-        }
-
         body { 
             font-family: 'Montserrat', sans-serif; 
             color: var(--warna-teks);
+            overflow-x: hidden; 
             margin: 0;
             background-color: var(--warna-kertas);
-            overflow-x: hidden;
         }
 
-        h1, h2, h3, h4, .font-elegan { font-family: 'Cormorant Garamond', serif; line-height: 1.4;}
-
-        section {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            padding: 80px 20px;
-            overflow: hidden;
-        }
+        h1, h2, h3, h4, .font-elegan { font-family: 'Cormorant Garamond', serif; line-height: 1.6;}
 
         /* ================= COVER ================= */
         #cover-screen {
@@ -63,37 +46,28 @@
         }
 
         #cover-screen::before {
-            content: ''; position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.3);
         }
 
         .bingkai-cover {
-            background-color: rgba(249, 246, 240, 0.75); 
+            background-color: rgba(249, 246, 240, 0.65); 
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 200px 200px 20px 20px; 
-            padding: 40px 25px;
+            border-radius: 200px 200px 16px 16px; 
+            padding: 50px 25px 40px 25px;
             width: 90%; max-width: 380px; 
             position: relative; z-index: 2;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             text-align: center;
-            animation: floating 3s ease-in-out infinite;
         }
 
-        @keyframes floating {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        /* FOTO PROFIL OVAL (REVISI HANA) */
         .foto-profil-oval {
             width: 140px; height: 210px;
-            object-fit: cover;
-            border-radius: 100px; 
+            object-fit: cover; border-radius: 100px; 
             border: 3px solid var(--warna-aksen);
-            margin: 0 auto 15px auto;
-            display: block;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin: 0 auto 20px auto; display: block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .buka-transisi { transform: translateY(-100%); opacity: 0; pointer-events: none; }
@@ -101,200 +75,234 @@
         /* ================= ISI UNDANGAN ================= */
         #isi-undangan { display: none; position: relative; }
 
-        .bg-bunga-atas {
-            position: absolute; top: -10px; right: -10px;
-            width: 150px; opacity: 0.6; z-index: 5;
-            transform: rotate(-90deg); 
+        /* PEMBATAS PER HALAMAN VISUAL */
+        section { padding: 80px 0; position: relative; }
+        
+        .bg-selang-seling {
+            background-color: #FFFFFF; /* Warna beda biar ada ilusi ganti halaman */
+            border-top: 1px dashed rgba(140, 154, 131, 0.4);
+            border-bottom: 1px dashed rgba(140, 154, 131, 0.4);
         }
 
+        /* ANIMASI BUNGA BERGERAK */
+        @keyframes ayun-atas { 0%, 100% { transform: rotate(-90deg) scale(1); } 50% { transform: rotate(-85deg) scale(1.05); } }
+        @keyframes ayun-bawah { 0%, 100% { transform: rotate(90deg) scale(1); } 50% { transform: rotate(85deg) scale(1.05); } }
+
+        .bg-bunga-atas {
+            position: absolute; top: -10px; right: -10px; width: 150px; opacity: 0.6; z-index: 5;
+            transform: rotate(-90deg); animation: ayun-atas 4s ease-in-out infinite;
+        }
         .bg-bunga-bawah {
-            position: absolute; bottom: -10px; left: -10px;
-            width: 150px; opacity: 0.6; z-index: 5;
-            transform: rotate(90deg);
+            position: absolute; bottom: -10px; left: -10px; width: 150px; opacity: 0.6; z-index: 5;
+            transform: rotate(90deg); animation: ayun-bawah 5s ease-in-out infinite;
         }
 
         .card-custom {
-            background-color: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(5px);
-            border-radius: 15px; padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px);
+            border: 1px solid rgba(140, 154, 131, 0.3); border-radius: 12px;
+            padding: 30px; height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            position: relative; z-index: 20;
         }
 
-        .galeri-img {
-            width: 100%; height: 200px;
-            object-fit: cover; border-radius: 10px;
-            cursor: pointer; transition: 0.5s;
+        /* COUNTDOWN TIMER */
+        .countdown-wrapper { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .countdown-item {
+            background-color: rgba(255, 255, 255, 0.7); border: 1px solid rgba(140, 154, 131, 0.4);
+            border-radius: 10px; padding: 10px; min-width: 65px; text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .galeri-img:hover { filter: brightness(0.7); transform: scale(1.02); }
+        .countdown-number { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: bold; color: var(--warna-aksen); line-height: 1; }
+        .countdown-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; font-weight: 500; }
 
-        /* Musik Melayang */
-        .music-control {
-            position: fixed; bottom: 25px; right: 25px;
-            z-index: 1000; background: var(--warna-aksen);
-            color: white; border-radius: 50%;
-            width: 50px; height: 50px;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
+        .galeri-img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(140, 154, 131, 0.3); cursor: pointer; transition: 0.3s; }
+        .galeri-img:hover { filter: brightness(0.8); }
 
-        .spin { animation: rotate 3s linear infinite; }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        /* Fullview Overlay */
         .fullview-overlay {
-            display: none; position: fixed; z-index: 10000;
-            left: 0; top: 0; width: 100%; height: 100%;
+            display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.95); backdrop-filter: blur(10px);
         }
         .fullview-container { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; }
         #fullViewImg { max-width: 90%; max-height: 85vh; object-fit: contain; }
 
-        .btn-vintage {
-            background-color: var(--warna-aksen); color: white; border: none;
-            padding: 12px 35px; border-radius: 50px; transition: 0.3s;
+        .music-control {
+            position: fixed; bottom: 25px; right: 25px; z-index: 1000; background: var(--warna-aksen);
+            color: white; border-radius: 50%; width: 50px; height: 50px; display: none; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
+        .spin { animation: rotate 3s linear infinite; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .btn-vintage { background-color: var(--warna-aksen); color: white; border: none; padding: 10px 28px; border-radius: 50px; }
+        hr.divider-vintage { width: 50px; border-top: 2px solid var(--warna-aksen); opacity: 1; margin: 15px auto 25px auto; }
+        
+        /* Tombol Save The Date */
+        .btn-savethedate {
+            border: 1px solid var(--warna-aksen); color: var(--warna-aksen);
+            background: transparent; border-radius: 50px; padding: 8px 25px; transition: 0.3s;
+        }
+        .btn-savethedate:hover { background: var(--warna-aksen); color: white; }
 
         .nav-prev, .nav-next {
-            position: absolute; top: 50%; color: white;
-            background: rgba(255,255,255,0.1); border: none;
+            position: absolute; top: 50%; color: white; background: rgba(255,255,255,0.1); border: none;
             padding: 20px; border-radius: 50%; font-size: 1.5rem;
         }
         .nav-prev { left: 10px; } .nav-next { right: 10px; }
-
-        .animate-bounce {
-            animation: bounce 2s infinite;
-        }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
     </style>
 </head>
 <body>
 
-    <audio id="bg-music" loop>
-        <source src="assets/music/lagu.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="bg-music" loop><source src="assets/music/lagu.mp3" type="audio/mpeg"></audio>
 
-    <div class="music-control" id="musicToggle" style="display:none">
-        <i id="musicIcon" class="bi bi-disc-fill spin"></i>
-    </div>
+    <div class="music-control" id="musicToggle"><i id="musicIcon" class="bi bi-disc-fill spin"></i></div>
 
     <div id="cover-screen">
-        <div class="bingkai-cover">
-            <img src="assets/img/coverpp.jpg" class="foto-profil-oval shadow-sm">
-            <p class="text-uppercase mb-2" style="letter-spacing: 3px; font-size: 0.7rem;">The Wedding Of</p>
-            <h1 class="display-5 font-elegan mb-4">Prio & Hana</h1>
+        <div class="bingkai-cover" data-aos="zoom-in" data-aos-duration="1500">
+            <img src="assets/img/coverpp.jpg" class="foto-profil-oval shadow-sm" style="width: 130px; height: 170px;">
+            <p class="text-uppercase mb-2" style="letter-spacing: 3px; font-size: 0.75rem;">The Wedding Of</p>
+            <h1 class="display-4 font-elegan mb-4">Prio & Hana</h1>
             <div class="mb-4">
-                <p class="mb-1" style="font-size: 0.8rem;">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-                <h6 class="fw-bold">Tamu Undangan</h6>
+                <p class="mb-1" style="font-size: 0.85rem;">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+                <h6 class="fw-bold text-dark">Tamu Undangan</h6>
             </div>
-            <button id="btn-buka" class="btn btn-vintage shadow-sm">
-                <i class="bi bi-envelope-open me-2"></i> Buka Undangan
-            </button>
+            <button id="btn-buka" class="btn btn-vintage shadow-sm"><i class="bi bi-envelope-open me-2"></i> Buka Undangan</button>
         </div>
     </div>
 
     <main id="isi-undangan">
-        <img src="assets/img/bunga-sudut.png" class="bg-bunga-atas">
-        <img src="assets/img/bunga-sudut.png" class="bg-bunga-bawah">
+        <img src="assets/img/bunga-sudut.png" alt="Bunga" class="bg-bunga-atas">
+        <img src="assets/img/bunga-sudut.png" alt="Bunga" class="bg-bunga-bawah">
 
-        <section>
-            <div class="container text-center" data-aos="fade-up">
-                <i class="bi bi-heart-fill mb-3 d-block" style="color: var(--warna-aksen); font-size: 2rem; opacity: 0.5;"></i>
-                <h3 class="font-elegan px-3 mb-4" style="font-style: italic; font-size: 1.5rem;">
-                    "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya..."
-                </h3>
-                <p class="fw-bold text-uppercase" style="letter-spacing: 2px; font-size: 0.8rem;">— QS. Ar-Rum: 21</p>
-                <div class="mt-5 animate-bounce">
-                    <i class="bi bi-chevron-double-down"></i><br><small style="font-size: 0.6rem; letter-spacing: 2px;">SCROLL</small>
+        <section class="container text-center py-5">
+            <div class="row justify-content-center" data-aos="fade-up">
+                <div class="col-md-8 p-5">
+                    <i class="bi bi-heart-fill mb-3 d-block" style="color: var(--warna-aksen); opacity: 0.5; font-size: 2rem;"></i>
+                    <h3 class="font-elegan mb-4" style="font-style: italic;">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir"</h3>
+                    <p class="fw-bold text-uppercase" style="letter-spacing: 2px; font-size: 0.8rem;">— QS. Ar-Rum: 21</p>
                 </div>
             </div>
         </section>
 
-        <section style="height: auto; min-height: 100vh;">
-            <div class="container text-center" data-aos="fade-up">
-                <h2 class="font-elegan display-6 mb-3">Assalamu'alaikum Wr. Wb.</h2>
+        <section class="bg-selang-seling py-5">
+            <div class="container text-center">
+                <div data-aos="fade-up">
+                    <h2 class="font-elegan display-5 mb-2">Assalamu'alaikum Wr. Wb.</h2>
+                    <hr class="divider-vintage">
+                    <p class="px-3 mt-3" style="font-weight: 400; line-height: 1.8; font-size: 0.95rem;">
+                        Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan.<br>
+                        Ya Allah, perkenankanlah kami merangkaikan kasih sayang dalam pernikahan:
+                    </p>
+                </div>
+
+                <div class="row mt-5 g-4 justify-content-center align-items-center">
+                    <div class="col-md-5" data-aos="fade-right">
+                        <img src="assets/img/ppprio.jpg" class="foto-profil-oval shadow-sm">
+                        <h3 class="font-elegan h3 fw-bold">Muhammad Prio Agustian, S.Kom.</h3>
+                        <p class="small mb-2">Putra Bapak Muhadi & Ibu Minal Khoirot</p>
+                        <a href="https://instagram.com/muhprio_" target="_blank" class="text-decoration-none" style="color: var(--warna-aksen);"><i class="bi bi-instagram"></i> @muhprio_</a>
+                    </div>
+                    <div class="col-12 col-md-2" data-aos="zoom-in"><span class="display-3 font-elegan" style="color: var(--warna-aksen); opacity: 0.5;">&</span></div>
+                    <div class="col-md-5" data-aos="fade-left">
+                        <img src="assets/img/pphana.jpg" class="foto-profil-oval shadow-sm">
+                        <h3 class="font-elegan h3 fw-bold">Yohana Viliam Comandani, Amd.Gz.</h3>
+                        <p class="small mb-2">Putri Bapak Parto & Ibu Supranti</p>
+                        <a href="https://instagram.com/hanacomandani" target="_blank" class="text-decoration-none" style="color: var(--warna-aksen);"><i class="bi bi-instagram"></i> @hanacomandani</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container text-center py-5">
+            <h2 class="font-elegan display-5 mb-2" data-aos="fade-up">Waktu & Tempat</h2>
+            <hr class="divider-vintage" data-aos="fade-up">
+            
+            <div data-aos="zoom-in">
+                <div class="countdown-wrapper mt-4">
+                    <div class="countdown-item"><div class="countdown-number" id="hari">00</div><div class="countdown-label">Hari</div></div>
+                    <div class="countdown-item"><div class="countdown-number" id="jam">00</div><div class="countdown-label">Jam</div></div>
+                    <div class="countdown-item"><div class="countdown-number" id="menit">00</div><div class="countdown-label">Menit</div></div>
+                    <div class="countdown-item"><div class="countdown-number" id="detik">00</div><div class="countdown-label">Detik</div></div>
+                </div>
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan+Prio+%26+Hana&dates=20260607T000000Z/20260607T060000Z&details=Acara+Pernikahan+Prio+dan+Hana+di+Jombang&location=Dsn.+Cangak,+Ngusikan,+Jombang" target="_blank" class="btn btn-savethedate text-decoration-none mt-2 mb-5">
+                    <i class="bi bi-calendar-check me-2"></i> Save The Date
+                </a>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="card-custom">
+                        <h4 class="font-elegan fw-bold mb-3">Akad Nikah</h4>
+                        <p class="mb-1 fw-bold">Minggu, 07 Juni 2026</p>
+                        <p class="small mb-3">07.00 - 08.30 WIB</p>
+                        <hr style="opacity: 0.2;">
+                        <p class="mt-3 mb-0 fw-semibold">Kediaman Mempelai Wanita</p>
+                        <p class="small mb-4">Dsn. Cangak, Ngusikan, Jombang</p>
+                        <a href="#" target="_blank" class="btn btn-outline-dark btn-sm rounded-pill px-4"><i class="bi bi-geo-alt"></i> Buka Peta</a>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-custom">
+                        <h4 class="font-elegan fw-bold mb-3">Resepsi</h4>
+                        <p class="mb-1 fw-bold">Minggu, 07 Juni 2026</p>
+                        <p class="small mb-3">11.00 - Selesai</p>
+                        <hr style="opacity: 0.2;">
+                        <p class="mt-3 mb-0 fw-semibold">Kediaman Mempelai Wanita</p>
+                        <p class="small mb-4">Dsn. Cangak, Ngusikan, Jombang</p>
+                        <a href="#" target="_blank" class="btn btn-outline-dark btn-sm rounded-pill px-4"><i class="bi bi-geo-alt"></i> Buka Peta</a>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-custom" style="border-top: 5px solid var(--warna-aksen)">
+                        <h4 class="font-elegan fw-bold mb-3">Unduh Mantu</h4>
+                        <p class="mb-1 fw-bold">Senin, 08 Juni 2026</p>
+                        <p class="small mb-3">12.00 - Selesai</p>
+                        <hr style="opacity: 0.2;">
+                        <p class="mt-3 mb-0 fw-semibold">Kediaman Mempelai Pria</p>
+                        <p class="small mb-4">Dsn. Jogoloyo, Sumobito, Jombang</p>
+                        <a href="#" target="_blank" class="btn btn-outline-dark btn-sm rounded-pill px-4"><i class="bi bi-geo-alt"></i> Buka Peta</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-selang-seling py-5 text-center">
+            <div class="container">
+                <h2 class="font-elegan display-5 mb-2" data-aos="fade-up">Momen Bahagia</h2>
+                <hr class="divider-vintage" data-aos="fade-up">
+                <div class="row g-3 mt-3 justify-content-center">
+                    <div class="col-6 col-md-4" data-aos="zoom-in"><img src="assets/img/priyo1.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
+                    <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="100"><img src="assets/img/priyo2.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
+                    <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="200"><img src="assets/img/priyo3.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
+                    <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="300"><img src="assets/img/priyo4.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
+                    <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="400"><img src="assets/img/priyo5.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container py-5 text-center">
+            <div class="card-custom mx-auto mb-5" style="max-width: 500px;" data-aos="fade-up">
+                <h2 class="font-elegan display-6 mb-2">Wedding Gift</h2>
                 <hr class="divider-vintage">
-                <p class="small px-3 mb-5">Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah perkenankanlah kami menikah:</p>
-                
-                <div class="row g-4 justify-content-center align-items-center">
-                    <div class="col-10 col-md-5" data-aos="fade-right">
-                        <img src="assets/img/ppprio.jpg" class="foto-profil-oval shadow">
-                        <h3 class="font-elegan h4 fw-bold">Muhammad Prio Agustian, S.Kom.</h3>
-                        <p class="small">Putra Bapak Muhadi & Ibu Minal Khoirot</p>
-                        <a href="https://instagram.com/muhprio_" target="_blank" class="text-decoration-none text-muted small"><i class="bi bi-instagram"></i> @muhprio_</a>
-                    </div>
-                    <div class="col-12 col-md-2" data-aos="zoom-in">
-                        <span class="display-4 font-elegan" style="color: var(--warna-aksen)">&</span>
-                    </div>
-                    <div class="col-10 col-md-5" data-aos="fade-left">
-                        <img src="assets/img/pphana.jpg" class="foto-profil-oval shadow">
-                        <h3 class="font-elegan h4 fw-bold">Yohana Viliam Comandani, Amd.Gz.</h3>
-                        <p class="small">Putri Bapak Parto & Ibu Supranti</p>
-                        <a href="https://instagram.com/hanacomandani" target="_blank" class="text-decoration-none text-muted small"><i class="bi bi-instagram"></i> @hanacomandani</a>
-                    </div>
+                <p class="small mb-4">Doa restu Anda sudah sangat cukup bagi kami, namun jika ingin memberikan tanda kasih:</p>
+                <div class="p-3 border rounded-3 text-start bg-white mb-3" style="border-color: rgba(140, 154, 131, 0.3) !important;">
+                    <p class="mb-0 fw-bold">Bank BCA</p>
+                    <p class="mb-0 fs-5">1234567890</p>
+                    <p class="mb-0 small" style="color: var(--warna-aksen);">a.n Muhammad Prio Agustian</p>
+                    <button class="btn btn-sm btn-outline-dark mt-2" onclick="navigator.clipboard.writeText('1234567890'); alert('Salin Berhasil!')">Salin Rekening</button>
                 </div>
             </div>
-        </section>
+            
+            <div class="card-custom mx-auto text-start mb-5" style="max-width: 600px;" data-aos="fade-up">
+                <h2 class="font-elegan text-center mb-2">Ucapan & Doa</h2>
+                <hr class="divider-vintage">
+                <form id="commentForm">
+                    <input type="text" class="form-control mb-3 bg-light border-0" placeholder="Nama Lengkap" required>
+                    <textarea class="form-control mb-3 bg-light border-0" rows="3" placeholder="Tulis ucapan dan doa..." required></textarea>
+                    <button type="submit" class="btn btn-vintage w-100">Kirim Pesan</button>
+                </form>
+            </div>
 
-        <section style="height: auto; min-height: 100vh;">
-            <div class="container">
-                <h2 class="font-elegan text-center mb-5" data-aos="fade-up">Waktu & Tempat</h2>
-                <div class="row g-3">
-                    <div class="col-12 col-md-4" data-aos="fade-up">
-                        <div class="card-custom text-center">
-                            <h5 class="fw-bold">Akad Nikah</h5>
-                            <p class="small mb-1">Minggu, 07 Juni 2026</p>
-                            <p class="small mb-2">07.00 - 08.30 WIB</p>
-                            <p class="small fw-bold mb-0">Dsn. Cangak, Ngusikan, Jombang</p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card-custom text-center">
-                            <h5 class="fw-bold">Resepsi</h5>
-                            <p class="small mb-1">Minggu, 07 Juni 2026</p>
-                            <p class="small mb-2">11.00 - Selesai</p>
-                            <p class="small fw-bold mb-0">Dsn. Cangak, Ngusikan, Jombang</p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="card-custom text-center" style="border-top: 4px solid var(--warna-aksen)">
-                            <h5 class="fw-bold">Unduh Mantu</h5>
-                            <p class="small mb-1">Senin, 08 Juni 2026</p>
-                            <p class="small mb-2">12.00 - Selesai</p>
-                            <p class="small fw-bold mb-0">Dsn. Jogoloyo, Sumobito, Jombang</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section style="height: auto; min-height: 100vh;">
-            <div class="container">
-                <h2 class="font-elegan text-center mb-4" data-aos="fade-up">Momen Bahagia</h2>
-                <div class="row g-2">
-                    <div class="col-4" data-aos="zoom-in"><img src="assets/img/priyo1.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
-                    <div class="col-4" data-aos="zoom-in" data-aos-delay="100"><img src="assets/img/priyo2.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
-                    <div class="col-4" data-aos="zoom-in" data-aos-delay="200"><img src="assets/img/priyo3.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
-                    <div class="col-6" data-aos="zoom-in" data-aos-delay="300"><img src="assets/img/priyo4.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
-                    <div class="col-6" data-aos="zoom-in" data-aos-delay="400"><img src="assets/img/priyo5.jpg" class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="container text-center" data-aos="fade-up">
-                <h2 class="font-elegan mb-4">Ucapan & Doa</h2>
-                <div class="card-custom text-start mb-4">
-                    <form id="commentForm">
-                        <input type="text" class="form-control mb-2" placeholder="Nama" required>
-                        <textarea class="form-control mb-2" rows="2" placeholder="Doa Anda..." required></textarea>
-                        <button type="submit" class="btn btn-vintage btn-sm w-100">Kirim</button>
-                    </form>
-                </div>
-                <h2 class="font-elegan display-6 mt-5">Wassalam</h2>
-                <h1 class="font-elegan display-5 mt-2" style="color: var(--warna-aksen)">Prio & Hana</h1>
-                <p class="small mt-4" style="opacity: 0.5;">© 2026. Created by Aku Dewe with ❤️</p>
-            </div>
+            <h1 class="font-elegan display-4 mt-5" style="color: var(--warna-aksen)">Prio & Hana</h1>
+            <p class="small">Created by Prio with ❤️</p>
         </section>
     </main>
 
@@ -310,7 +318,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // AOS Refresh tiap scroll biar animasi hidup terus
         AOS.init({ duration: 1000, once: false, mirror: true });
 
         const btnBuka = document.getElementById('btn-buka');
@@ -323,24 +330,34 @@
             document.getElementById('cover-screen').classList.add('buka-transisi');
             document.getElementById('isi-undangan').style.display = 'block';
             musicToggle.style.display = 'flex';
-            document.body.style.overflowY = 'auto'; 
-            setTimeout(() => { AOS.refresh(); }, 500);
+            document.body.style.overflow = 'auto'; 
+            setTimeout(() => { document.getElementById('cover-screen').style.display = 'none'; AOS.refresh(); }, 1200);
         });
 
-        // Play/Pause Musik
         let isPlaying = true;
         musicToggle.onclick = () => {
-            if (isPlaying) { 
-                music.pause(); 
-                musicIcon.classList.remove('spin');
-                musicToggle.style.opacity = "0.6";
-            } else { 
-                music.play(); 
-                musicIcon.classList.add('spin');
-                musicToggle.style.opacity = "1";
-            }
+            if (isPlaying) { music.pause(); musicIcon.classList.remove('spin'); musicToggle.style.opacity = "0.6"; } 
+            else { music.play(); musicIcon.classList.add('spin'); musicToggle.style.opacity = "1"; }
             isPlaying = !isPlaying;
         };
+
+        // Countdown Timer (Target: 7 Juni 2026, 07:00:00)
+        const targetDate = new Date("June 7, 2026 07:00:00").getTime();
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("hari").innerText = "00"; document.getElementById("jam").innerText = "00";
+                document.getElementById("menit").innerText = "00"; document.getElementById("detik").innerText = "00";
+                return;
+            }
+            document.getElementById("hari").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("jam").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("menit").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("detik").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
 
         // Logika Galeri
         let currentImgIndex = 0;
