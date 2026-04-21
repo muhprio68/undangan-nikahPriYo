@@ -235,9 +235,20 @@
         /* --- FOOTER / WASSALAM FINALE --- */
         .footer-finale {
             background-color: var(--warna-kertas);
-            padding: 100px 0 50px 0;
+            /* Tambah padding bawah jadi 150px biar teks gak ketabrak kaset/bunga */
+            padding: 100px 0 150px 0; 
             position: relative;
             overflow: hidden;
+        }
+
+        .made-by {
+            margin-top: 60px;
+            font-size: 0.75rem; /* Gedein dikit biar kebaca */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #888; /* Gelapin dikit biar kontras */
+            position: relative;
+            z-index: 1000; /* NAININ Z-INDEX: Biar di atas segala hiasan */
         }
 
         .img-footer-wrap {
@@ -274,17 +285,20 @@
             margin-top: 20px;
         }
 
-        .made-by {
-            margin-top: 60px;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #aaa;
-        }
-
         .made-by span {
             color: var(--warna-aksen);
             font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .music-control {
+                width: 40px; 
+                height: 40px;
+                bottom: 20px;
+                right: 20px;
+            }
+            .music-control i {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -513,7 +527,7 @@
                 <div class="card-custom mx-auto mb-5 position-relative overflow-hidden" style="max-width: 500px;" data-aos="fade-up">
                     
                     <img src="assets/img/bungarumbai.png" class="bunga-di-card-tl" alt="Bunga">
-                    <img src="assets/img/bungakiribawah.png" class="bunga-di-card-br" alt="Bunga">
+                    <img src="assets/img/bungaberdiri.png" class="bunga-di-card-br" alt="Bunga">
 
                     <div style="position: relative; z-index: 2;">
                         <h2 class="font-elegan display-6 mb-2">Wedding Gift</h2>
@@ -587,7 +601,7 @@
                 
                 <div class="img-footer-wrap">
                     <img src="assets/img/ppwassalam.jpg" class="img-footer-main" alt="Prio & Hana">
-                    <img src="assets/img/bungakiribawah.png" class="bunga-footer" alt="Bunga">
+                    <img src="assets/img/bungavintage.png" class="bunga-footer" alt="Bunga">
                 </div>
 
                 <p class="small mb-1 text-muted">Kami yang berbahagia,</p>
@@ -597,9 +611,9 @@
                     <i class="bi bi-arrow-up me-1"></i> Kembali ke Atas
                 </a>
 
-                <div class="made-by">
-                    Digital Invitation by <span>PrioAgustian</span>
-                </div>
+                <div class="made-by" data-aos="fade-up">
+            Digital Invitation by <span style="color: var(--warna-aksen-gelap);">Prio with ❤️</span>
+        </div>
             </div>
         </footer>
     </main>
