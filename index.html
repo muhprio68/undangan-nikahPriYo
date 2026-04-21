@@ -699,18 +699,14 @@
                         <h2 class="font-elegan text-center mb-2">Ucapan & Doa</h2>
                         <hr class="divider-vintage">
                         
-                        <form id="commentForm" class="mb-4 pb-4 border-bottom">
-                            <input type="text" class="form-control mb-3 bg-light border-0" placeholder="Nama Lengkap" required>
-                            <textarea class="form-control mb-3 bg-light border-0" rows="3" placeholder="Tulis ucapan dan doa..." required></textarea>
-                            <button type="submit" class="btn btn-vintage w-100">Kirim Pesan</button>
+                        <form id="formUcapan" class="mb-4 pb-4 border-bottom text-start">
+                            <input type="text" id="inputNama" class="form-control mb-3 bg-light border-0" placeholder="Nama Lengkap" required>
+                            <textarea id="inputPesan" class="form-control mb-3 bg-light border-0" rows="3" placeholder="Tulis ucapan dan doa..." required></textarea>
+                            <button type="submit" id="btnKirim" class="btn btn-vintage w-100">Kirim Pesan</button>
                         </form>
 
-                        <div id="commentList" style="max-height: 250px; overflow-y: auto;">
-                            <div class="p-3 mb-3 bg-white rounded shadow-sm border-start border-4" style="border-color: var(--warna-aksen) !important;">
-                                <p class="fw-bold mb-1 small">Budi Sudarsono</p>
-                                <p class="mb-0 small">Selamat ya Prio & Hana! Semoga samawa sampai kakek nenek.</p>
+                        <div id="daftarUcapan" class="text-start" style="max-height: 250px; overflow-y: auto;">
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -879,6 +875,77 @@
                 console.error('Gagal menyalin: ', err);
             });
         }
+
+        const apiUrl = "/api/ucapan"; 
+
+        // 1. FUNGSI UNTUK MENGAMBIL DATA DARI SUPABASE
+        async function loadUcapan() {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                
+                const wadah = document.getElementById('daftarUcapan');
+                wadah.innerHTML = ''; // Bersihin dulu isinya
+
+                // Kalau database belum kosong (bukan null)
+                if (data && data.length > 0) {
+                    data.forEach(item => {
+                        wadah.innerHTML += `
+                            <div class="p-3 mb-3 bg-white rounded shadow-sm border-start border-4" style="border-color: var(--warna-aksen) !important;">
+                                <p class="fw-bold mb-1 small" style="color: var(--warna-aksen-gelap);">${item.nama}</p>
+                                <p class="mb-0 small text-muted">${item.pesan}</p>
+                            </div>
+                        `;
+                    });
+                } else {
+                    // Kalau database masih kosong (kayak sekarang)
+                    wadah.innerHTML = '<p class="text-muted small text-center mt-3">Belum ada ucapan. Jadilah yang pertama!</p>';
+                }
+            } catch (error) {
+                console.error("Gagal load ucapan:", error);
+            }
+        }
+
+        // 2. FUNGSI UNTUK MENGIRIM DATA PAS TOMBOL DIKLIK
+        document.getElementById('formUcapan').addEventListener('submit', async function(e) {
+            e.preventDefault(); // Biar halaman gak me-refresh
+            
+            const btn = document.getElementById('btnKirim');
+            btn.innerHTML = 'Mengirim... <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+            btn.disabled = true; // Kunci tombol biar gak di-spam klik ganda
+
+            const payload = {
+                nama: document.getElementById('inputNama').value,
+                pesan: document.getElementById('inputPesan').value
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if(response.ok) {
+                    // Bersihin form kalau sukses
+                    document.getElementById('inputNama').value = '';
+                    document.getElementById('inputPesan').value = '';
+                    
+                    // Panggil ulang data biar pesan baru langsung muncul di atas
+                    loadUcapan();
+                } else {
+                    alert("Gagal ngirim pesan, coba lagi bre!");
+                }
+            } catch (error) {
+                alert("Koneksi bermasalah!");
+            } finally {
+                btn.innerHTML = 'Kirim Pesan';
+                btn.disabled = false; // Buka kunci tombol
+            }
+        });
+
+        // 3. JALANKAN LOAD PERTAMA KALI SAAT HALAMAN DIBUKA
+        window.addEventListener('DOMContentLoaded', loadUcapan);
     </script>
 </body>
 </html>
