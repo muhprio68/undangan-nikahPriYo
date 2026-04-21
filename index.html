@@ -907,52 +907,60 @@
             }
         }
 
-        // 2. FUNGSI NAMPILIN KE LAYAR (DENGAN PAGINATION & AVATAR)
+        // Fungsi pembantu buat ngerubah format tanggal dari database jadi cakep
+        function formatTanggal(tglStr) {
+            if (!tglStr) return 'Baru saja';
+            const date = new Date(tglStr);
+            if (isNaN(date)) return tglStr; // Kalau format gagal dibaca, tampilin aslinya
+            
+            // Format ala Indonesia: 21 Apr 2026, 15:30
+            const options = { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+            return date.toLocaleDateString('id-ID', options).replace(/\./g, ':');
+        }
+
+        // 2. FUNGSI NAMPILIN KE LAYAR (DESAIN AVATAR INISIAL ELEGAN + TANGGAL)
         function renderUcapan() {
             const wadah = document.getElementById('daftarUcapan');
             const wadahPagination = document.getElementById('wadahPagination');
             wadah.innerHTML = ''; 
 
-            // Kalau database kosong
             if (!semuaUcapan || semuaUcapan.length === 0) {
                 wadah.innerHTML = '<p class="text-muted small text-center mt-4">Belum ada ucapan. Jadilah yang pertama!</p>';
                 wadahPagination.classList.add('d-none');
                 return;
             }
 
-            // Hitung logika pagination
             const totalHalaman = Math.ceil(semuaUcapan.length / itemPerHalaman);
             const indexMulai = (halamanSaatIni - 1) * itemPerHalaman;
             const indexAkhir = indexMulai + itemPerHalaman;
             
-            // Ambil 3 data aja buat halaman ini
             const dataTampil = semuaUcapan.slice(indexMulai, indexAkhir);
 
-            // Bikin elemen HTML tiap komentar
             dataTampil.forEach(item => {
-                // Ambil huruf pertama nama buat jadi Avatar, set default 'A' kalo kosong
                 const inisial = (item.nama ? item.nama.charAt(0) : 'A').toUpperCase();
                 
                 wadah.innerHTML += `
                     <div class="d-flex mb-3 p-3 bg-white rounded-4 shadow-sm border" style="border-color: rgba(140, 154, 131, 0.2) !important;">
                         <div class="flex-shrink-0">
-                            <div class="text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 45px; height: 45px; font-weight: bold; font-size: 1.2rem; background-color: var(--warna-aksen) !important;">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center border shadow-sm" 
+                                 style="width: 45px; height: 45px; font-weight: bold; font-size: 1.3rem; color: #333; background-color: #f8f9fa; font-family: 'Playfair Display', Georgia, serif;">
                                 ${inisial}
                             </div>
                         </div>
                         <div class="ms-3 flex-grow-1">
-                            <h6 class="mb-1 fw-bold" style="color: var(--warna-teks);">${item.nama}</h6>
+                            <h6 class="mb-0 fw-bold" style="color: var(--warna-teks);">${item.nama}</h6>
+                            <small class="text-muted" style="font-size: 0.7rem; display: block; margin-bottom: 8px;">
+                                <i class="bi bi-clock me-1"></i> ${formatTanggal(item.created_at)}
+                            </small>
                             <p class="mb-0 text-muted small" style="line-height: 1.5;">${item.pesan}</p>
                         </div>
                     </div>
                 `;
             });
 
-            // Munculin dan atur tombol pagination
             wadahPagination.classList.remove('d-none');
             document.getElementById('infoHalaman').innerText = `Hal ${halamanSaatIni} / ${totalHalaman}`;
             
-            // Matiin tombol kalau udah mentok
             document.getElementById('btnPrev').disabled = (halamanSaatIni === 1);
             document.getElementById('btnNext').disabled = (halamanSaatIni === totalHalaman);
         }
@@ -1001,6 +1009,8 @@
             }
         });
 
+
+        
         // 5. JALANKAN SAAT HALAMAN PERTAMA DIBUKA
         window.addEventListener('DOMContentLoaded', fetchUcapan);
     </script>
