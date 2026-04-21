@@ -271,10 +271,10 @@
         .bunga-footer {
             position: absolute;
             bottom: -30px;
-            right: -40px;
+            right: -70px;
             width: 150px;
             z-index: 3;
-            opacity: 0.9;
+            opacity: 0.8;
         }
 
         .nama-besar-footer {
@@ -299,6 +299,55 @@
             .music-control i {
                 font-size: 1.2rem;
             }
+        }
+
+        /* --- EFEK VIDING: PARALLAX & GLASSMORPHISM --- */
+        .viding-parallax {
+            position: relative;
+            /* Masukin foto prewed lu di sini. Wajib landscape biar makin pecah */
+            background-image: url('assets/img/priyo5.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Ini rahasia biar fotonya diem pas discroll */
+            padding: 100px 0;
+            overflow: hidden;
+        }
+
+        .viding-parallax::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Kaca film gelap biar elegan */
+            z-index: 1;
+        }
+
+        .story-card-viding {
+            background: rgba(255, 255, 255, 0.1); /* Putih transparan banget */
+            backdrop-filter: blur(12px); /* Efek embun/kaca burem */
+            -webkit-backdrop-filter: blur(12px); /* Support buat iPhone/Safari */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* List putih tipis */
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+
+        .story-card-viding:last-child {
+            margin-bottom: 0;
+        }
+
+        .story-card-viding h5 {
+            color: #fff !important; /* Timpa warna aksen hijau jadi putih biar masuk ke tema gelap */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .story-card-viding p {
+            color: #f0f0f0 !important;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
     </style>
 </head>
@@ -378,7 +427,7 @@
         <section class="text-center bg-selang-seling position-relative" style="padding-top: 20px; padding-bottom: 80px";>
             
             
-            <img src="assets/img/bungakananatas.png" class="bunga-acara-2" alt="Bunga Hiasan">
+            
             
 <img src="assets/img/bungatengah.png" class="bunga-acara-3" alt="Bunga Hiasan">
             <div class="container position-relative" style="z-index: 2;">
@@ -477,7 +526,46 @@
             </div>
         </section>
 
-        <section class="py-5">
+        <section class="viding-parallax text-center">
+            <div class="container position-relative" style="z-index: 2;">
+                
+                <h2 class="font-elegan display-5 mb-2 text-white" style="text-shadow: 2px 2px 10px rgba(0,0,0,0.7);" data-aos="fade-up">Love Story</h2>
+                <hr class="divider-vintage" style="border-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.5);" data-aos="fade-up">
+                
+                <div class="row justify-content-center mt-5">
+                    <div class="col-md-7 col-lg-6 px-4">
+                        
+                        <div class="story-card-viding" data-aos="fade-up">
+                            <h5 class="font-elegan fw-bold mb-2">Awal Kenal</h5>
+                            <p>Satu kota asal namun tak pernah bertemu, takdir justru mempertemukan kami lewat dm instagram saat di tanah perantauan yang sama.</p>
+                        </div>
+
+                        <div class="story-card-viding" data-aos="fade-up" data-aos-delay="100">
+                            <h5 class="font-elegan fw-bold mb-2">Pertemuan</h5>
+                            <p>Berawal dari pesan singkat, kami memutuskan bertemu untuk saling mengenal dan berbagi cerita secara nyata.</p>
+                        </div>
+
+                        <div class="story-card-viding" data-aos="fade-up" data-aos-delay="200">
+                            <h5 class="font-elegan fw-bold mb-2">Komitmen</h5>
+                            <p>Merasa saling melengkapi, ia menunjukkan kesungguhan dengan datang langsung memintaku kepada orang tuaku.</p>
+                        </div>
+
+                        <div class="story-card-viding" data-aos="fade-up" data-aos-delay="300">
+                            <h5 class="font-elegan fw-bold mb-2">Lamaran</h5>
+                            <p>Pada 14 Desember 2025, di hadapan kedua keluarga besar, kami resmi melangkah ke jenjang yang lebih serius.</p>
+                        </div>
+
+                        <div class="story-card-viding" data-aos="fade-up" data-aos-delay="400">
+                            <h5 class="font-elegan fw-bold mb-2" style="color: #d4af37 !important;">Hari Bahagia</h5>
+                            <p>Hari ini 7 Juni 2026, atas izin Allah dan restu orang tua, kami mengikat janji suci untuk bersama selamanya.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- <section class="py-5">
             <div class="container">
                 <h2 class="font-elegan text-center display-5 mb-2" data-aos="fade-up">Love Story</h2>
                 <hr class="divider-vintage" data-aos="fade-up">
@@ -506,7 +594,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <section class="bg-selang-seling py-5 text-center">
             <div class="container">
@@ -541,7 +629,16 @@
                         <div id="giftContainer" style="display: none; margin-top: 20px;">
                             
                             <div class="p-4 border rounded-3 bg-white mb-3 shadow-sm text-center" style="border-color: rgba(140, 154, 131, 0.3) !important;">
-                                <img src="assets/img/logo-bjatim.png" alt="Bank BRI" style="height: 25px; margin-bottom: 15px;">
+                                <img src="assets/img/logo-bni.png" alt="Bank BNI" style="height: 25px; margin-bottom: 15px;">
+                                <p class="mb-1 fs-5 fw-bold" style="letter-spacing: 2px;" id="rekBNI">1929559058</p>
+                                <p class="mb-3 small text-muted">a.n. Yohana Viliam Comandani</p>
+                                <button class="btn btn-sm btn-outline-dark rounded-pill px-4" onclick="salinData('rekBNI', 'Nomor Rekening')">
+                                    <i class="bi bi-files me-1"></i> Salin Rekening
+                                </button>
+                            </div>
+
+                            <div class="p-4 border rounded-3 bg-white mb-3 shadow-sm text-center" style="border-color: rgba(140, 154, 131, 0.3) !important;">
+                                <img src="assets/img/logo-bjatim.png" alt="Bank JATIM" style="height: 25px; margin-bottom: 15px;">
                                 <p class="mb-1 fs-5 fw-bold" style="letter-spacing: 2px;" id="rekBJATIM">2052019462</p>
                                 <p class="mb-3 small text-muted">a.n. Yohana Viliam Comandani</p>
                                 <button class="btn btn-sm btn-outline-dark rounded-pill px-4" onclick="salinData('rekBJATIM', 'Nomor Rekening')">
