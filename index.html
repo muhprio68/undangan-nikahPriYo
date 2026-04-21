@@ -705,8 +705,18 @@
                             <button type="submit" id="btnKirim" class="btn btn-vintage w-100">Kirim Pesan</button>
                         </form>
 
-                        <div id="daftarUcapan" class="text-start" style="max-height: 250px; overflow-y: auto;">
+                        <div id="daftarUcapan" class="text-start mb-3">
                             </div>
+
+                        <div id="wadahPagination" class="d-flex justify-content-between align-items-center d-none mt-4">
+                            <button id="btnPrev" class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="gantiHalaman(-1)">
+                                <i class="bi bi-chevron-left"></i> Prev
+                            </button>
+                            <span id="infoHalaman" class="small text-muted fw-bold font-elegan">Hal 1</span>
+                            <button id="btnNext" class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="gantiHalaman(1)">
+                                Next <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -875,44 +885,91 @@
                 console.error('Gagal menyalin: ', err);
             });
         }
-
+    </script>
+    <script>
         const apiUrl = "/api/ucapan"; 
+        
+        // Variabel global buat nyimpen data dan tracking halaman
+        let semuaUcapan = [];
+        let halamanSaatIni = 1;
+        const itemPerHalaman = 3; // <-- Di sini lu bisa atur mau tampil berapa komen per page
 
-        // 1. FUNGSI UNTUK MENGAMBIL DATA DARI SUPABASE
-        async function loadUcapan() {
+        // 1. FUNGSI TARIK DATA DARI DATABASE
+        async function fetchUcapan() {
             try {
                 const response = await fetch(apiUrl);
-                const data = await response.json();
+                semuaUcapan = await response.json();
                 
-                const wadah = document.getElementById('daftarUcapan');
-                wadah.innerHTML = ''; // Bersihin dulu isinya
-
-                // Kalau database belum kosong (bukan null)
-                if (data && data.length > 0) {
-                    data.forEach(item => {
-                        wadah.innerHTML += `
-                            <div class="p-3 mb-3 bg-white rounded shadow-sm border-start border-4" style="border-color: var(--warna-aksen) !important;">
-                                <p class="fw-bold mb-1 small" style="color: var(--warna-aksen-gelap);">${item.nama}</p>
-                                <p class="mb-0 small text-muted">${item.pesan}</p>
-                            </div>
-                        `;
-                    });
-                } else {
-                    // Kalau database masih kosong (kayak sekarang)
-                    wadah.innerHTML = '<p class="text-muted small text-center mt-3">Belum ada ucapan. Jadilah yang pertama!</p>';
-                }
+                halamanSaatIni = 1; // Tiap narik data baru, balik ke halaman 1
+                renderUcapan();     // Tampilkan datanya ke layar
             } catch (error) {
                 console.error("Gagal load ucapan:", error);
             }
         }
 
-        // 2. FUNGSI UNTUK MENGIRIM DATA PAS TOMBOL DIKLIK
+        // 2. FUNGSI NAMPILIN KE LAYAR (DENGAN PAGINATION & AVATAR)
+        function renderUcapan() {
+            const wadah = document.getElementById('daftarUcapan');
+            const wadahPagination = document.getElementById('wadahPagination');
+            wadah.innerHTML = ''; 
+
+            // Kalau database kosong
+            if (!semuaUcapan || semuaUcapan.length === 0) {
+                wadah.innerHTML = '<p class="text-muted small text-center mt-4">Belum ada ucapan. Jadilah yang pertama!</p>';
+                wadahPagination.classList.add('d-none');
+                return;
+            }
+
+            // Hitung logika pagination
+            const totalHalaman = Math.ceil(semuaUcapan.length / itemPerHalaman);
+            const indexMulai = (halamanSaatIni - 1) * itemPerHalaman;
+            const indexAkhir = indexMulai + itemPerHalaman;
+            
+            // Ambil 3 data aja buat halaman ini
+            const dataTampil = semuaUcapan.slice(indexMulai, indexAkhir);
+
+            // Bikin elemen HTML tiap komentar
+            dataTampil.forEach(item => {
+                // Ambil huruf pertama nama buat jadi Avatar, set default 'A' kalo kosong
+                const inisial = (item.nama ? item.nama.charAt(0) : 'A').toUpperCase();
+                
+                wadah.innerHTML += `
+                    <div class="d-flex mb-3 p-3 bg-white rounded-4 shadow-sm border" style="border-color: rgba(140, 154, 131, 0.2) !important;">
+                        <div class="flex-shrink-0">
+                            <div class="text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 45px; height: 45px; font-weight: bold; font-size: 1.2rem; background-color: var(--warna-aksen) !important;">
+                                ${inisial}
+                            </div>
+                        </div>
+                        <div class="ms-3 flex-grow-1">
+                            <h6 class="mb-1 fw-bold" style="color: var(--warna-teks);">${item.nama}</h6>
+                            <p class="mb-0 text-muted small" style="line-height: 1.5;">${item.pesan}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Munculin dan atur tombol pagination
+            wadahPagination.classList.remove('d-none');
+            document.getElementById('infoHalaman').innerText = `Hal ${halamanSaatIni} / ${totalHalaman}`;
+            
+            // Matiin tombol kalau udah mentok
+            document.getElementById('btnPrev').disabled = (halamanSaatIni === 1);
+            document.getElementById('btnNext').disabled = (halamanSaatIni === totalHalaman);
+        }
+
+        // 3. FUNGSI KLIK TOMBOL NEXT / PREV
+        function gantiHalaman(arah) {
+            halamanSaatIni += arah;
+            renderUcapan(); // Render ulang dengan halaman baru
+        }
+
+        // 4. FUNGSI KIRIM PESAN BARU
         document.getElementById('formUcapan').addEventListener('submit', async function(e) {
-            e.preventDefault(); // Biar halaman gak me-refresh
+            e.preventDefault(); 
             
             const btn = document.getElementById('btnKirim');
-            btn.innerHTML = 'Mengirim... <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
-            btn.disabled = true; // Kunci tombol biar gak di-spam klik ganda
+            btn.innerHTML = 'Mengirim... <span class="spinner-border spinner-border-sm" role="status"></span>';
+            btn.disabled = true; 
 
             const payload = {
                 nama: document.getElementById('inputNama').value,
@@ -927,12 +984,12 @@
                 });
 
                 if(response.ok) {
-                    // Bersihin form kalau sukses
+                    // Bersihin form
                     document.getElementById('inputNama').value = '';
                     document.getElementById('inputPesan').value = '';
                     
-                    // Panggil ulang data biar pesan baru langsung muncul di atas
-                    loadUcapan();
+                    // Tarik data terbaru dari database
+                    fetchUcapan();
                 } else {
                     alert("Gagal ngirim pesan, coba lagi bre!");
                 }
@@ -940,12 +997,12 @@
                 alert("Koneksi bermasalah!");
             } finally {
                 btn.innerHTML = 'Kirim Pesan';
-                btn.disabled = false; // Buka kunci tombol
+                btn.disabled = false;
             }
         });
 
-        // 3. JALANKAN LOAD PERTAMA KALI SAAT HALAMAN DIBUKA
-        window.addEventListener('DOMContentLoaded', loadUcapan);
+        // 5. JALANKAN SAAT HALAMAN PERTAMA DIBUKA
+        window.addEventListener('DOMContentLoaded', fetchUcapan);
     </script>
 </body>
 </html>
