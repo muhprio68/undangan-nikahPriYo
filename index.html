@@ -96,13 +96,13 @@
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
 
          @keyframes ayun-atas2 { 0%, 100% { transform: rotate(-90deg) scale(1); } 50% { transform:  scale(1.05); } }
-        @keyframes ayun-bawah2 { 0%, 100% { transform: rotate(-70deg) scale(1); } 50% { transform: rotate(-110deg) scale(1.05); } }
+        @keyframes ayun-bawah2 { 0%, 100% { transform: rotate(170deg) scale(1); } 50% { transform: rotate(190deg) scale(1.05); } }
 
         .bg-bunga-atas { position: absolute; top: -10px; right: -10px; width: 150px; opacity: 0.6; z-index: 5; transform: rotate(-90deg); animation: ayun-atas 4s ease-in-out infinite; }
         .bg-bunga-bawah { position: absolute; bottom: -10px; left: -10px; width: 150px; opacity: 0.6; z-index: 5; transform: rotate(90deg); animation: ayun-bawah 5s ease-in-out infinite; }
 /* --- HIASAN BUNGA SECTION ACARA --- */
         /* --- HIASAN BUNGA SECTION ACARA (RAME TAPI RAPI) --- */
-        .bunga-acara-1 { position: absolute; top: 0%; left: -50px; width: 180px; opacity: 0.6; z-index: 5;   animation: ayun-bawah2 5s ease-in-out infinite;}
+        .bunga-acara-1 { position: absolute; top: -5%; left: -40px; width: 150px; opacity: 0.6; z-index: 5;   animation: ayun-bawah2 5s ease-in-out infinite;}
         .bunga-acara-2 { position: absolute; bottom: -5%; right: -30px; width: 200px; opacity: 0.6; z-index: 5;  animation: ayun-atas2 4s ease-in-out infinite; }
         /* --- BUNGA TENGAH DI ATAS COUNTDOWN --- */
         .bunga-acara-3 {
@@ -110,16 +110,50 @@
             margin: -10px auto -10px auto; /* Margin auto buat tengah, minus bottom biar mepet ke jam */
             width: 180px;
             height: 80px;
-            opacity: 0.7;
+            opacity: 0.5;
             position: relative;
             z-index: 3;
             transform: rotate(0deg); /* Sesuaikan rotasi jika perlu */
+            filter: none; /* Hapus blur agar terlihat tajam */
+        }
+
+        .bunga-acara-4 {
+            display: block;
+            margin: -90px auto -90px auto; /* Margin auto buat tengah, minus bottom biar mepet ke jam */
+            width: auto;
+            height: 270px;
+            opacity: 0.5;
+            position: relative;
+            z-index: 3;
+            transform: rotate(90deg); /* Sesuaikan rotasi jika perlu */
             filter: none; /* Hapus blur agar terlihat tajam */
         }
         
         /* Utility buat waktu gabung */
         .waktu-gabung { display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; }
         
+        .ranting-napak {
+    position: absolute;
+    bottom: -85px;
+    right: -150px;          /* Kunci di paling kanan */
+    width: 1000px;
+    height: 1300px;      /* Sesuaikan ukurannya */
+    opacity: 0.1;      /* Tipis-tipis ala sketsa pensil */
+    z-index: 1;        /* Di bawah teks */
+    pointer-events: none; /* Biar gak bisa diklik/ganggu form */
+    transform: rotate(-10deg); 
+}
+
+/* Biar pas di HP gak nutupin teks banget */
+@media (max-width: 768px) {
+    .ranting-napak {
+        width: 700px;
+        opacity: 0.1;
+        right: -200px; /* Agak dibuang ke luar dikit biar gak penuh */
+        transform: rotate(-10deg); 
+    }
+}
+
         .card-custom { background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); border: 1px solid rgba(140, 154, 131, 0.3); border-radius: 12px; padding: 30px; height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.03); position: relative; z-index: 20; }
 /* --- HIASAN BUNGA DI DALAM CARD --- */
         .card-custom {
@@ -178,16 +212,36 @@
             transform: rotate(15deg);
             pointer-events: none;
         }
-/* --- HIASAN POHON DI GALERI --- */
-        .hiasan-pohon-pojok {
-            position: absolute;
-            bottom: -10px;    /* Ngatur nempel ke bawah */
-            right: -10px;     /* Ngatur nempel ke kanan. Kalau mau di kiri ganti jadi left: -10px; */
-            width: 200px;     /* Ukuran gede kecilnya pohon */
-            opacity: 0.7;     /* Efek transparan */
-            z-index: 10;      /* Ditaruh agak depan biar kelihatan *pop-up* */
-            pointer-events: none; /* PENTING! Biar pohonnya gak nge-blok foto pas diklik */
-        }
+
+        /* Styling Bunga Melayang */
+.bunga-pojok-atassection {
+    position: absolute;
+    top: 0px; /* Jarak dari atas */
+    left: -20px; /* Jarak dari kiri */
+    width: 180px; /* Atur gede kecilnya bunga */
+    opacity: 0.6; /* Level transparan (0.1 - 1.0) */
+    pointer-events: none; /* Biar gak ganggu klik */
+    z-index: 1;
+}
+
+.bunga-pojok-bawahsection {
+    position: absolute;
+    bottom: 5px; /* Jarak dari bawah */
+    right: -20px; /* Jarak dari kiri */
+    width: 180px;
+    opacity: 0.6;
+    transform: rotate(180deg); /* Balik bunganya biar beda arah */
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Biar di HP gak kegedean bunganya */
+@media (max-width: 768px) {
+    .bunga-pojok-atassection, .bunga-pojok-bawahsection {
+        width: 120px;
+        opacity: 0.6;
+    }
+}
 
         .countdown-wrapper { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
         .countdown-item { background-color: rgba(255, 255, 255, 0.7); border: 1px solid rgba(140, 154, 131, 0.4); border-radius: 10px; padding: 10px; min-width: 65px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
@@ -386,9 +440,9 @@
         <section class="bg-selang-seling" style="padding-top: 20px; padding-bottom: 80px;">
             <div class="container text-center">
                 
-                <div data-aos="fade-down">
+                
                     <img src="assets/img/bungatengah.png" class="bunga-acara-3" alt="Bunga Hiasan">
-                </div>
+                
 
                 <div data-aos="fade-up">
                     <h2 class="font-elegan display-5 mb-2">Assalamu'alaikum Wr. Wb.</h2>
@@ -401,10 +455,13 @@
             </div>
         </section>
 
-        <section class="py-5"> 
-            <div class="container text-center">
+        <section class="py-5 position-relative overflow-hidden"> 
+            
+            <img src="assets/img/hiasanpojokpp.png" class="bunga-pojok-atassection" alt="Bunga">
+            <img src="assets/img/hiasanpojokpp.png" class="bunga-pojok-bawahsection" alt="Bunga">
+
+            <div class="container text-center position-relative" style="z-index: 2;">
                 <div class="row g-2 g-md-4 justify-content-center align-items-center">
-                    <img src="assets/img/bungakanan.png" class="bunga-acara-1" alt="Bunga Hiasan">
                     <div class="col-md-5" data-aos="fade-right">
                         <img src="assets/img/ppprio.jpg" class="foto-profil-oval shadow-sm">
                         <h3 class="font-elegan nama-fit fw-bold mb-1">Muhammad Prio Agustian, S.Kom.</h3>
@@ -424,12 +481,9 @@
             </div>
         </section>
 
-        <section class="text-center bg-selang-seling position-relative" style="padding-top: 20px; padding-bottom: 80px";>
+        <section class="text-center bg-selang-seling position-relative" style="padding-top: 20px; padding-bottom: 80px";>       
+            <img src="assets/img/hiasantengah.png" class="bunga-acara-4" alt="Bunga Hiasan">
             
-            
-            
-            
-<img src="assets/img/bungatengah.png" class="bunga-acara-3" alt="Bunga Hiasan">
             <div class="container position-relative" style="z-index: 2;">
                 
                 <hr class="divider-vintage" data-aos="fade-up">
@@ -745,6 +799,7 @@
         </div>
     </div>
         <footer class="footer-finale text-center">
+            <img src="assets/img/ranting-pensil.png" class="ranting-napak" alt="Dekorasi">
             <div class="container" data-aos="fade-up">
                 
                 <h2 class="font-elegan display-6 mb-3">Wassalamu'alaikum Wr. Wb.</h2>
