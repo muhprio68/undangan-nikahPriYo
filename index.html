@@ -138,7 +138,19 @@
     right: -150px;          /* Kunci di paling kanan */
     width: 1000px;
     height: 1300px;      /* Sesuaikan ukurannya */
-    opacity: 0.1;      /* Tipis-tipis ala sketsa pensil */
+    opacity: 0.05;      /* Tipis-tipis ala sketsa pensil */
+    z-index: 1;        /* Di bawah teks */
+    pointer-events: none; /* Biar gak bisa diklik/ganggu form */
+    transform: rotate(-10deg); 
+}
+
+.bunga-pensil {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;          /* Kunci di paling kanan */
+    width: 500px;
+    height: 500px;      /* Sesuaikan ukurannya */
+    opacity: 0.05;      /* Tipis-tipis ala sketsa pensil */
     z-index: 1;        /* Di bawah teks */
     pointer-events: none; /* Biar gak bisa diklik/ganggu form */
     transform: rotate(-10deg); 
@@ -148,7 +160,7 @@
 @media (max-width: 768px) {
     .ranting-napak {
         width: 700px;
-        opacity: 0.1;
+        opacity: 0.05;
         right: -200px; /* Agak dibuang ke luar dikit biar gak penuh */
         transform: rotate(-10deg); 
     }
@@ -426,13 +438,13 @@
     <main id="isi-undangan">
         <img src="assets/img/bunga-sudut.png" alt="Bunga" class="bg-bunga-atas">
         <img src="assets/img/bunga-sudut.png" alt="Bunga" class="bg-bunga-bawah">
+        <section class="container text-center py-5">
 
-        <section class="container text-center py-5 mt-4">
             <div class="row justify-content-center" data-aos="fade-up">
                 <div class="col-md-8 px-4 py-5">
-                    <i class="bi bi-heart-fill mb-4 mt-2 d-block" style="color: var(--warna-aksen); opacity: 0.5; font-size: 2rem;"></i>
+                    <i class="bi bi-heart-fill mb-4 d-block" style="color: var(--warna-aksen); opacity: 0.5; font-size: 2rem;"></i>
                     <h3 class="font-elegan mb-5" style="font-style: italic;">"Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir"</h3>
-                    <p class="fw-bold text-uppercase mb-4" style="letter-spacing: 2px; font-size: 0.8rem;">— QS. Ar-Rum: 21</p>
+                    <p class="fw-bold text-uppercase" style="letter-spacing: 2px; font-size: 0.8rem;">— QS. Ar-Rum: 21</p>
                 </div>
             </div>
         </section>
@@ -440,7 +452,8 @@
         <section class="bg-selang-seling" style="padding-top: 20px; padding-bottom: 80px;">
             <div class="container text-center">
                 
-                
+                                    <img src="assets/img/bunga-pensil.png" class="bunga-pensil" alt="Dekorasi">
+
                     <img src="assets/img/bungatengah.png" class="bunga-acara-3" alt="Bunga Hiasan">
                 
 
@@ -525,7 +538,7 @@
                                 </div>
                                 <div class="col-6">
                                     <h5 class="fw-bold mb-1 font-elegan fs-4">Resepsi</h5>
-                                    <p class="small mb-0 text-muted">Pukul: 11.00 - Selesai</p>
+                                    <p class="small mb-0 text-muted">Pukul: 11.00 - 15.00 WIB</p>
                                 </div>
                             </div>
 
@@ -633,7 +646,7 @@
             </div>
         </section>
 
-        <section class="py-5 text-center">
+        <!-- <section class="py-5 text-center">
             <div class="container">
                 <div class="card-custom mx-auto mb-5 position-relative overflow-hidden" style="max-width: 500px;" data-aos="fade-up">
                     
@@ -682,9 +695,9 @@
                         </div>
                     </div> </div>
             </div>
-        </section>
+        </section> -->
 
-        <!-- <section class="py-5 text-center">
+        <section class="py-5 text-center">
             <div class="container">
                 <div class="card-custom mx-auto mb-5 position-relative overflow-hidden" style="max-width: 500px;" data-aos="fade-up">
                     
@@ -720,28 +733,19 @@
                                 </button>
                             </div>
 
-                            <div class="p-4 border rounded-3 bg-white mb-3 shadow-sm text-center" style="border-color: rgba(140, 154, 131, 0.3) !important;">
-                                <img src="assets/img/logo-bri.png" alt="Bank BRI" style="height: 25px; margin-bottom: 15px;">
-                                <p class="mb-1 fs-5 fw-bold" style="letter-spacing: 2px;" id="rekBRI">002301101902507</p>
-                                <p class="mb-3 small text-muted">a.n. Muhammad Prio Agustian</p>
-                                <button class="btn btn-sm btn-outline-dark rounded-pill px-4" onclick="salinData('rekBRI', 'Nomor Rekening')">
-                                    <i class="bi bi-files me-1"></i> Salin Rekening
-                                </button>
-                            </div>
-
                             <div class="p-4 border rounded-3 bg-white shadow-sm text-center" style="border-color: rgba(140, 154, 131, 0.3) !important;">
                                 <i class="bi bi-box-seam d-block mb-2" style="font-size: 2.5rem; color: var(--warna-aksen);"></i>
-                                <p class="mb-3 small text-muted" style="line-height: 1.6;" id="alamatPrio">
-                                    Dusun Jogoloyo, RT.01 / RW.02, Desa Jogoloyo, Kec. Sumobito, Kabupaten Jombang, Jawa Timur
+                                <p class="mb-3 small text-muted" style="line-height: 1.6;" id="alamatHana">
+                                    Dsn. Cangak RT/RW 1/1 Ds. Sumbernongko, Kec. Ngusikan, Jombang Jawa Timur
                                 </p>
-                                <button class="btn btn-sm btn-outline-dark rounded-pill px-4" onclick="salinData('alamatPrio', 'Alamat')">
+                                <button class="btn btn-sm btn-outline-dark rounded-pill px-4" onclick="salinData('alamatHana', 'Alamat')">
                                     <i class="bi bi-files me-1"></i> Salin Alamat
                                 </button>
                             </div>
                         </div>
                     </div> </div>
             </div>
-        </section> -->
+        </section>
 
         <section class="bg-selang-seling py-5 text-center">
             <div class="container">
