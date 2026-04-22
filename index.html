@@ -858,7 +858,7 @@
 <body>
 
     <audio id="bg-music" loop>
-        <source src="assets/music/lagu.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio>
     <div class="music-control" id="musicToggle"><i id="musicIcon" class="bi bi-disc-fill spin"></i></div>
 
@@ -1375,6 +1375,18 @@
         const musicToggle = document.getElementById('musicToggle');
         const musicIcon = document.getElementById('musicIcon');
 
+        const playlist = [
+            "assets/music/lagu1.mp3", // Jatah lu
+            "assets/music/lagu2.mp3"  // Lagu netral wkwk
+        ];
+
+        function pilihLaguRandom() {
+            const indexAcak = Math.floor(Math.random() * playlist.length);
+            music.src = playlist[indexAcak];
+        }
+
+        pilihLaguRandom();
+
         btnBuka.addEventListener('click', () => {
             music.play();
             document.getElementById('cover-screen').classList.add('buka-transisi');
@@ -1392,6 +1404,20 @@
             else { music.play(); musicIcon.classList.add('spin'); musicToggle.style.opacity = "1"; }
             isPlaying = !isPlaying;
         };
+
+        // 2. Fungsi deteksi tab aktif atau nggak
+        document.addEventListener("visibilitychange", function () {
+            if (document.hidden) {
+                // Kalau tab disembunyikan / pindah tab, lagu pause
+                music.pause();
+            } else {
+                // Hanya play balik kalau emang sebelumnya udah statusnya main
+                // Ini biar gak tiba-tiba bunyi padahal tamu belom klik 'Buka'
+                if (music.currentTime > 0 && !music.paused) {
+                    music.play().catch(e => console.log("Resume dicegah browser"));
+                }
+            }
+        });
 
         const targetDate = new Date("June 7, 2026 07:00:00").getTime();
         const countdownInterval = setInterval(() => {
