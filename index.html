@@ -2,9 +2,22 @@
 <html lang="id">
 
 <head>
+    <link rel="icon" href="assets/img/icon4.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan - Prio & Hana</title>
+    <title>Undangan Pernikahan Prio & Hana</title>
+
+    <meta name="description" content="Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di acara pernikahan kami.">
+    <meta property="og:title" content="The Wedding of Prio & Hana">
+    <meta property="og:description" content="Minggu, 07 Juni 2026 - Jombang, Jawa Timur">
+    <meta property="og:url" content="https://undangannikah-priohana.vercel.app/">
+
+    <meta property="og:image" content="https://undangannikah-priohana.vercel.app/assets/img/priyo4.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#8c9a83">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -334,10 +347,10 @@
             bottom: 0px;
             right: 0px;
             /* Kunci di paling kanan */
-            width: 500px;
-            height: 500px;
+            width: auto;
+            height: 400px;
             /* Sesuaikan ukurannya */
-            opacity: 0.05;
+            opacity: 0.1;
             /* Tipis-tipis ala sketsa pensil */
             z-index: 1;
             /* Di bawah teks */
@@ -352,6 +365,17 @@
                 width: 700px;
                 opacity: 0.05;
                 right: -200px;
+                /* Agak dibuang ke luar dikit biar gak penuh */
+                transform: rotate(-10deg);
+            }
+        }
+
+        /* Biar pas di HP gak nutupin teks banget */
+        @media (max-width: 768px) {
+            .bunga-pensil {
+                width: auto;
+                opacity: 0.08;
+                right: -25px;
                 /* Agak dibuang ke luar dikit biar gak penuh */
                 transform: rotate(-10deg);
             }
@@ -454,9 +478,9 @@
 
         .bunga-pojok-bawahsection {
             position: absolute;
-            bottom: 5px;
+            bottom: -5px;
             /* Jarak dari bawah */
-            right: -20px;
+            right: -30px;
             /* Jarak dari kiri */
             width: 180px;
             opacity: 0.6;
