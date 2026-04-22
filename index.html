@@ -1414,9 +1414,9 @@
             } else {
                 // Hanya play balik kalau emang sebelumnya udah statusnya main
                 // Ini biar gak tiba-tiba bunyi padahal tamu belom klik 'Buka'
-                if (music.currentTime > 0 && !music.paused) {
-                    music.play().catch(e => console.log("Resume dicegah browser"));
-                }
+                music.play().catch(error => {
+            console.log("Autoplay dicegah browser, nunggu interaksi tamu.");
+        });
             }
         });
 
