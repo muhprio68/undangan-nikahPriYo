@@ -13,7 +13,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://undangannikah-priohana.vercel.app/">
     <meta property="og:title" content="The Wedding of Prio & Hana">
-    <meta property="og:description" content="Minggu, 07 Mei 2026 - Jombang, Jawa Timur">
+    <meta property="og:description" content="Minggu, 07 Juni 2026 - Jombang, Jawa Timur">
     <meta property="og:image" content="https://undangannikah-priohana.vercel.app/assets/img/sampul.jpg">
     <meta property="og:image:secure_url" content="https://undangannikah-priohana.vercel.app/assets/img/sampul.jpg">
     <meta property="og:image:type" content="image/jpg">
@@ -37,6 +37,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Felipa&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Felipa&display=swap" rel="stylesheet">
+
 
     <style>
         :root {
@@ -69,6 +72,25 @@
             font-family: 'Cormorant Garamond', serif;
             line-height: 1.6;
         }
+
+        .felipa-regular {
+  font-family: "Felipa", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.bad-script-regular {
+  font-family: "Bad Script", cursive;
+  font-style: italic;
+  line-height: 1.0;
+  font-size: 2.5rem !important; 
+    
+    /* Mengurangi ketebalan: 400 itu normal, 300 itu tipis (light) */
+    font-weight: 300 !important; 
+    
+    /* Biar liukan latinnya nggak terlalu rapet */
+    letter-spacing: 1px;
+}
 
         /* ================= COVER ================= */
         #cover-screen {
@@ -798,7 +820,7 @@
         .viding-parallax {
             position: relative;
             /* Masukin foto prewed lu di sini. Wajib landscape biar makin pecah */
-            background-image: url('assets/img/priyo5.jpg');
+            background-image: url('assets/img/lovestory.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -858,7 +880,8 @@
 <body>
 
     <audio id="bg-music" loop>
-        Your browser does not support the audio element.
+        <source src="assets/music/lagu1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
     </audio>
     <div class="music-control" id="musicToggle"><i id="musicIcon" class="bi bi-disc-fill spin"></i></div>
 
@@ -905,7 +928,7 @@
 
 
                 <div data-aos="fade-up">
-                    <h2 class="font-elegan display-5 mb-2">Assalamu'alaikum Wr. Wb.</h2>
+                    <h1 class="bad-script-regular display-3 mb-2 mt-4">Assalamu'alaikum Wr. Wb.</h1>
                     <hr class="divider-vintage">
                     <p class="px-3 mt-3 mb-0" style="font-weight: 400; line-height: 1.8; font-size: 0.95rem;">
                         Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan.<br>
@@ -936,7 +959,7 @@
                     </div>
                     <div class="col-md-5" data-aos="fade-left">
                         <img src="assets/img/pphana.jpg" class="foto-profil-oval shadow-sm">
-                        <h3 class="font-elegan nama-fit fw-bold mb-1">Yohana Viliam Comandani, Amd.Gz.</h3>
+                        <h3 class="font-elegan nama-fit fw-bold mb-1">Yohana Viliam Comandani, A.Md.Gz.</h3>
                         <p class="teks-ortu text-muted">Putri Bapak Parto & Ibu Supranti</p>
                         <a href="https://instagram.com/hanacomandani" target="_blank" class="text-decoration-none"
                             style="color: var(--warna-aksen); font-size: 0.8rem;"><i class="bi bi-instagram"></i>
@@ -1018,7 +1041,7 @@
                             </div>
 
                             <h6 class="fw-bold mb-1 text-dark fs-5">Kediaman Mempelai Wanita</h6>
-                            <p class="small text-muted mb-4" style="line-height: 1.6;">Dsn. Cangak, Ngusikan, Jombang
+                            <p class="small text-muted mb-4" style="line-height: 1.6;">Dsn. Cangak, Sumbernongko, Ngusikan, Jombang
                             </p>
 
                             <a href="https://www.google.com/maps?q=-7.409591,112.3162058&z=17&hl=id" target="_blank"
@@ -1129,9 +1152,13 @@
                             class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
                     <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="200"><img src="assets/img/priyo3.jpg"
                             class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
-                    <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="300"><img src="assets/img/priyo4.jpg"
+                    <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="300"><img src="assets/img/priyo4.png"
                             class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
-                    <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="400"><img src="assets/img/priyo5.jpg"
+                    <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="400"><img src="assets/img/priyo5.png"
+                            class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
+                    <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="400"><img src="assets/img/priyo6.jpg"
+                            class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
+                    <div class="col-6 col-md-4" data-aos="zoom-in" data-aos-delay="400"><img src="assets/img/priyo7.jpg"
                             class="galeri-img shadow-sm" onclick="openFullView(this.src)"></div>
                 </div>
             </div>
@@ -1238,7 +1265,7 @@
                                     style="width: 70px; height: 50px;">
 
                                 <p class="mb-3 small text-muted" style="line-height: 1.6;" id="alamatHana">
-                                    Dsn. Cangak RT/RW 1/1 Ds. Sumbernongko, Kec. Ngusikan, Jombang Jawa Timur
+                                    Dsn. Cangak RT/RW 1/1 Ds. Sumbernongko, <br> Kec. Ngusikan, Jombang
                                 </p>
 
                                 <button class="btn btn-sm btn-outline-dark rounded-pill px-4"
@@ -1320,7 +1347,7 @@
             <img src="assets/img/ranting-pensil.png" class="ranting-napak" alt="Dekorasi">
             <div class="container" data-aos="fade-up">
 
-                <h2 class="font-elegan display-6 mb-3">Wassalamu'alaikum Wr. Wb.</h2>
+                <h2 class="bad-script-regular mb-3">Wassalamu'alaikum Wr. Wb.</h2>
                 <p class="small mb-5 px-4" style="line-height: 1.8;">
                     Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i <br class="d-none d-md-block">
                     berkenan hadir dan memberikan doa restu bagi kami.
@@ -1375,19 +1402,6 @@
         const musicToggle = document.getElementById('musicToggle');
         const musicIcon = document.getElementById('musicIcon');
 
-        const playlist = [
-            "assets/music/lagu1.mp3", // Jatah lu
-            "assets/music/lagu2.mp3" , //jatah hana
-            "assets/music/lagu3.mp3"  // Lagu netral wkwk
-        ];
-
-        function pilihLaguRandom() {
-            const indexAcak = Math.floor(Math.random() * playlist.length);
-            music.src = playlist[indexAcak];
-        }
-
-        pilihLaguRandom();
-
         btnBuka.addEventListener('click', () => {
             music.play();
             document.getElementById('cover-screen').classList.add('buka-transisi');
@@ -1438,7 +1452,7 @@
 
         // Galeri
         let currentImgIndex = 0;
-        const galleryImages = ['assets/img/priyo1.jpg', 'assets/img/priyo2.jpg', 'assets/img/priyo3.jpg', 'assets/img/priyo4.jpg', 'assets/img/priyo5.jpg'];
+        const galleryImages = ['assets/img/priyo1.jpg', 'assets/img/priyo2.jpg', 'assets/img/priyo3.jpg', 'assets/img/priyo4.png', 'assets/img/priyo5.png', 'assets/img/priyo6.jpg', 'assets/img/priyo7.jpg'];
 
         function openFullView(src) {
             const fileName = src.split('/').pop();
