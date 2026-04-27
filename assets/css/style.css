@@ -1,0 +1,31 @@
+:root {
+    --warna-kertas: #F9F6F0;
+    --warna-teks: #3A3A3A;
+    --warna-aksen: #8C9A83;
+    --warna-aksen-gelap: #717d69;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--warna-teks);
+    background-color: var(--warna-kertas);
+    margin: 0;
+    padding: 0;
+}
+
+/* Custom Classes */
+.font-elegan { font-family: 'Cormorant Garamond', serif; }
+.bad-script-regular { 
+    font-family: "Bad Script", cursive; 
+    font-size: 1.5rem !important; 
+    font-weight: 300 !important; 
+}
+
+.font-hashtag-banget {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    color: #696060;
+}
+
+/* --- Copy Sisa CSS Lu di Sini --- */

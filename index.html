@@ -39,7 +39,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Felipa&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Felipa&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -83,7 +83,7 @@
   font-family: "Bad Script", cursive;
   font-style: italic;
   line-height: 1.0;
-  font-size: 2.5rem !important; 
+  font-size: 1.5rem !important; 
     
     /* Mengurangi ketebalan: 400 itu normal, 300 itu tipis (light) */
     font-weight: 300 !important; 
@@ -874,6 +874,17 @@
             color: #f0f0f0 !important;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
+
+.font-hashtag-banget {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    font-size: 1.3rem;/* Biar tegas huruf besar semua */
+    letter-spacing: 1px; /* Ini rahasia biar kelihatan mewah */
+    color: #696060;
+    margin-top: 15px;
+    display: block;
+}
+        
     </style>
 </head>
 
@@ -1108,8 +1119,7 @@
 
                         <div class="story-card-viding" data-aos="fade-up">
                             <h5 class="font-elegan fw-bold mb-2">Awal Kenal</h5>
-                            <p>Satu kota asal namun tak pernah bertemu, takdir justru mempertemukan kami lewat dm
-                                instagram saat di tanah perantauan yang sama.</p>
+                            <p>Satu kota asal, namun tak pernah bertemu. Takdir justru mempertemukan kami melalui DM Instagram saat berada di tanah perantauan yang sama.</p>
                         </div>
 
                         <div class="story-card-viding" data-aos="fade-up" data-aos-delay="100">
@@ -1163,57 +1173,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- <section class="py-5 text-center">
-            <div class="container">
-                <div class="card-custom mx-auto mb-5 position-relative overflow-hidden" style="max-width: 500px;" data-aos="fade-up">
-                    
-                    <img src="assets/img/bungarumbai.png" class="bunga-di-card-tl" alt="Bunga">
-                    <img src="assets/img/bungaberdiri.png" class="bunga-di-card-br" alt="Bunga">
-
-                    <div style="position: relative; z-index: 2;">
-                        <h2 class="font-elegan display-6 mb-2">Wedding Gift</h2>
-                        <hr class="divider-vintage">
-                        <p class="small mb-4">Tanpa mengurangi rasa hormat, apabila Bapak/Ibu berkenan memberikan tanda kasih, silakan melalui tombol di bawah ini:</p>
-                        
-                        <button id="btnToggleGift" class="btn btn-abu-tipis mb-2" onclick="toggleGift()">
-                            <i class="bi bi-gift-fill me-2"></i> Kirim Hadiah
-                        </button>
-
-                        <div id="giftContainer" style="display: none; margin-top: 20px;">
-                            
-                            <div class="p-4 border rounded-3 bg-white mb-3 shadow-sm text-center position-relative overflow-hidden" style="border-color: rgba(140, 154, 131, 0.3) !important;">
-                                <img src="assets/img/bunga1.png" class="bunga-di-card-tl" alt="Bunga">
-                                
-                                <div style="position: relative; z-index: 2;">
-                                    <i class="bi bi-qr-code-scan d-block mb-3" style="font-size: 2.5rem; color: var(--warna-aksen);"></i>
-                                    <h5 class="fw-bold mb-1 font-elegan text-dark">Kirim via QRIS</h5>
-                                    <p class="small text-muted mb-3">Praktis untuk semua E-Wallet & M-Banking</p>
-                                    
-                                    <button type="button" class="btn btn-sm btn-outline-dark rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#qrisModal">
-                                        Tampilkan QRIS
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="p-4 border rounded-3 bg-white shadow-sm text-center position-relative overflow-hidden" style="border-color: rgba(140, 154, 131, 0.3) !important;">
-                                <img src="assets/img/bunga3.png" class="bunga-di-card-br" alt="Bunga" style="opacity: 0.15; width: 100px;">
-                                
-                                <div style="position: relative; z-index: 2;">
-                                    <i class="bi bi-box-seam d-block mb-2" style="font-size: 2.5rem; color: var(--warna-aksen);"></i>
-                                    <p class="mb-3 small text-muted" style="line-height: 1.6;" id="alamatPrio">
-                                        Dsn. Cangak RT/RW 1/1 Ds. Sumbernongko, Kec. Ngusikan, Jombang Jawa Timur
-                                    </p>
-                                    <button class="btn btn-sm btn-outline-dark rounded-pill px-4" onclick="salinData('alamatPrio', 'Alamat')">
-                                        <i class="bi bi-files me-1"></i> Salin Alamat
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div> </div>
-            </div>
-        </section> -->
 
         <section class="py-5 text-center">
             <div class="container">
@@ -1317,32 +1276,7 @@
                 </div>
             </div>
         </section>
-        <div class="modal fade" id="qrisModal" tabindex="-1" aria-labelledby="qrisModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
 
-                    <div class="modal-header border-0 pb-0 justify-content-end">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body text-center pt-0 pb-5 px-4">
-                        <h3 class="font-elegan fw-bold mb-1" id="qrisModalLabel" style="color: var(--warna-teks);">QRIS
-                            Payment</h3>
-                        <p class="small text-muted mb-4">a.n. Muhammad Prio Agustian</p>
-
-                        <img src="assets/img/qris-prio.jpg" alt="QRIS Prio" class="img-fluid rounded mb-4 shadow-sm"
-                            style="max-width: 230px; border: 1px solid #eaeaea;">
-
-                        <br>
-                        <a href="assets/img/qris-prio.jpg" download="QRIS-Prio-Hana.jpg"
-                            class="btn btn-vintage rounded-pill px-5 shadow-sm">
-                            <i class="bi bi-download me-2"></i> Simpan QRIS
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
         <footer class="footer-finale text-center">
             <img src="assets/img/ranting-pensil.png" class="ranting-napak" alt="Dekorasi">
             <div class="container" data-aos="fade-up">
@@ -1364,6 +1298,7 @@
                         style="width: 180px; height: auto; opacity: 1.8;">
                 </div>
 
+                <span class="font-hashtag-banget">#PrioritasHana</span>
                 <a href="#" class="btn btn-sm btn-outline-secondary rounded-pill px-4 mt-4" style="font-size: 0.7rem;">
                     <i class="bi bi-arrow-up me-1"></i> Kembali ke Atas
                 </a>
