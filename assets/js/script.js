@@ -6,7 +6,11 @@ const urlParams = new URLSearchParams(window.location.search);
 const namaTamu = urlParams.get('to') || urlParams.get('nama');
 
 if (namaTamu) {
+    // 1. Ubah nama di cover depan
     document.getElementById('nama-tamu').innerText = namaTamu;
+    
+    // 2. OTOMATIS ISI FORM UCAPAN
+    document.getElementById('inputNama').value = namaTamu;
 }
 
 // KONTROL COVER & AUDIO
