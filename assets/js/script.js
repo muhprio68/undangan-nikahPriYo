@@ -78,7 +78,7 @@ const countdownInterval = setInterval(() => {
 let currentImgIndex = 0;
 const galleryImages = [
     'assets/img/priyo1.jpg', 'assets/img/priyo2.jpg', 'assets/img/priyo3.jpg', 
-    'assets/img/priyo4.png', 'assets/img/priyo5.png', 'assets/img/priyo6.jpg', 'assets/img/priyo7.jpg'
+    'assets/img/priyo4.jpg', 'assets/img/priyo5.png', 'assets/img/priyo6.jpg', 'assets/img/priyo7.jpg'
 ];
 
 function openFullView(src) {
