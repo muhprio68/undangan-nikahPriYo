@@ -42,16 +42,41 @@
 
 <body>
 
+    <!-- ================= SCROLL PROGRESS BAR ================= -->
+    <div id="scroll-progress-bar"></div>
+
+    <!-- ================= PRELOADER ================= -->
+    <div id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-monogram">
+                <span class="font-elegan">P</span>
+                <span class="preloader-heart">&#10084;</span>
+                <span class="font-elegan">H</span>
+            </div>
+            <p class="preloader-text">Memuat undangan...</p>
+        </div>
+    </div>
+
+    <!-- ================= TOAST NOTIFICATION ================= -->
+    <div id="toast-container"></div>
+
     <audio id="bg-music" loop>
         <source src="assets/music/lagu1.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     <div class="music-control" id="musicToggle"><i id="musicIcon" class="bi bi-disc-fill spin"></i></div>
 
+    <!-- ================= COVER SCREEN ================= -->
     <div id="cover-screen">
+        <!-- Petal Canvas -->
+        <canvas id="petal-canvas"></canvas>
+
         <div class="bingkai-cover" data-aos="zoom-in" data-aos-duration="1500">
             <img src="assets/img/coverpp.jpg" class="foto-profil-oval shadow-sm" style="width: 130px; height: 170px;">
-            <p class="text-uppercase mb-2" style="letter-spacing: 3px; font-size: 0.75rem;">The Wedding Of</p>
+            <!-- Typewriter: "The Wedding Of" -->
+            <p class="text-uppercase mb-2" style="letter-spacing: 3px; font-size: 0.75rem;">
+                <span id="typewriter-label"></span><span class="typewriter-cursor">|</span>
+            </p>
             <h1 class="display-4 font-elegan mb-4">Prio & Hana</h1>
             <div class="mb-4">
                 <p class="mb-1" style="font-size: 0.85rem;">Kepada Yth. Bapak/Ibu/Saudara/i</p>
@@ -302,7 +327,13 @@
                             <textarea id="inputPesan" class="form-control mb-3 bg-light border-0" rows="3" placeholder="Tulis ucapan dan doa..." required></textarea>
                             <button type="submit" id="btnKirim" class="btn btn-vintage w-100">Kirim Pesan</button>
                         </form>
-                        <div id="daftarUcapan" class="text-start mb-3"></div>
+                        <!-- Skeleton Loading -->
+                        <div id="skeletonUcapan">
+                            <div class="skeleton-item mb-3"></div>
+                            <div class="skeleton-item mb-3"></div>
+                            <div class="skeleton-item"></div>
+                        </div>
+                        <div id="daftarUcapan" class="text-start mb-3" style="display:none;"></div>
                         <div id="wadahPagination" class="d-flex justify-content-between align-items-center d-none mt-4">
                             <button id="btnPrev" class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="gantiHalaman(-1)">
                                 <i class="bi bi-chevron-left"></i> Prev
@@ -344,6 +375,7 @@
         </footer>
     </main>
 
+    <!-- Fullview Galeri -->
     <div id="fullViewOverlay" class="fullview-overlay">
         <span class="close-fullview" onclick="closeFullView()">×</span>
         <button class="nav-prev" onclick="changeImg(-1)"><i class="bi bi-chevron-left"></i></button>
@@ -355,6 +387,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- canvas-confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     
     <script src="assets/js/script.js"></script>
 </body>

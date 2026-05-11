@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 
 	_ "github.com/lib/pq"
 )
@@ -30,7 +31,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 	db, err := sql.Open("postgres", os.Getenv("SUPABASE_DB_URL"))
 	if err != nil {
-		// INI YANG BARU: Nampilin error asli pas konek DB
 		http.Error(w, "Koneksi DB Gagal: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -39,7 +39,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		rows, err := db.Query("SELECT nama, pesan, created_at FROM ucapan ORDER BY created_at DESC")
 		if err != nil {
-			// INI YANG BARU: Nampilin error asli pas baca data
 			http.Error(w, "Gagal query data: "+err.Error(), http.StatusInternalServerError)
 			return
 		}
@@ -65,9 +64,23 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		// Sanitasi: trim whitespace di awal & akhir
+		// Karakter lain (emoji, dll) dibiarkan — tamu boleh nulis emoticon
+		u.Nama = strings.TrimSpace(u.Nama)
+		u.Pesan = strings.TrimSpace(u.Pesan)
+
+		// Validasi tidak boleh kosong setelah trim
+		if u.Nama == "" {
+			http.Error(w, "Nama tidak boleh kosong", http.StatusBadRequest)
+			return
+		}
+		if u.Pesan == "" {
+			http.Error(w, "Pesan tidak boleh kosong", http.StatusBadRequest)
+			return
+		}
+
 		_, err := db.Exec("INSERT INTO ucapan (nama, pesan) VALUES ($1, $2)", u.Nama, u.Pesan)
 		if err != nil {
-			// INI YANG BARU: Nampilin error asli pas nyimpen data
 			http.Error(w, "Gagal simpan ke database: "+err.Error(), http.StatusInternalServerError)
 			return
 		}
