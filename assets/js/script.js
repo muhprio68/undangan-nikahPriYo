@@ -400,32 +400,39 @@ function formatTanggal(tglStr) {
     return date.toLocaleDateString('id-ID', options).replace(/\./g, ':');
 }
 
-// --- FUNGSI RENDER UCAPAN (VERSI SLIDER / CAROUSEL) ---
 function renderUcapan() {
     const wadah = document.getElementById('daftarUcapan');
     const wadahPagination = document.getElementById('wadahPagination');
-    
-    // Sembunyiin tombol Next/Prev karena kita pake swipe
-    if (wadahPagination) {
-        wadahPagination.style.display = 'none'; 
-    }
+    const skeleton = document.getElementById('skeletonUcapan');
 
+    // 1. Sembunyikan skeleton, tampilkan list (INI YANG BIKIN MUNCUL!)
+    if (skeleton) skeleton.style.display = 'none';
+    wadah.style.display = 'block';
     wadah.innerHTML = '';
 
+    // 2. Sembunyikan pagination karena kita pake sistem Slider/Swipe
+    if (wadahPagination) {
+        wadahPagination.classList.add('d-none');
+    }
+
+    // Kalau kosong
     if (!semuaUcapan || semuaUcapan.length === 0) {
-        wadah.innerHTML = '<p class="text-muted small text-center mt-4">Belum ada ucapan. Jadilah yang pertama!</p>';
+        wadah.innerHTML = '<p class="text-muted small text-center mt-4">Belum ada ucapan. Jadilah yang pertama! 🌸</p>';
         return;
     }
 
-    // Ambil maksimal 20 ucapan terbaru biar HP tamu nggak nge-lag
-    const dataTerbaru = semuaUcapan.slice(0, 20); 
+    // 3. Batasi 20 ucapan terbaru biar HP nggak berat pas nge-swipe
+    const dataTerbaru = semuaUcapan.slice(0, 20);
 
     let htmlSlider = '<div class="wadah-slider-ucapan">';
 
     dataTerbaru.forEach(item => {
-        // Ambil huruf pertama buat avatar inisial
         const inisial = (item.nama ? item.nama.charAt(0) : 'A').toUpperCase();
         
+        // 4. Pake escapeHtml bawaan kodingan lu biar aman dari hacker wkwk
+        const namaEscaped = escapeHtml(item.nama || '');
+        const pesanEscaped = escapeHtml(item.pesan || '');
+
         htmlSlider += `
             <div class="item-ucapan-slider">
                 <div class="d-flex p-3 bg-white rounded-4 shadow-sm border h-100" style="border-color: rgba(140, 154, 131, 0.2) !important;">
@@ -436,11 +443,11 @@ function renderUcapan() {
                         </div>
                     </div>
                     <div class="ms-3 flex-grow-1 text-start">
-                        <h6 class="mb-0 fw-bold" style="color: var(--warna-teks);">${item.nama}</h6>
+                        <h6 class="mb-0 fw-bold" style="color: var(--warna-teks);">${namaEscaped}</h6>
                         <small class="text-muted" style="font-size: 0.7rem; display: block; margin-bottom: 8px;">
                             <i class="bi bi-clock me-1"></i> ${formatTanggal(item.created_at)}
                         </small>
-                        <p class="mb-0 text-muted small" style="line-height: 1.5;">${item.pesan}</p>
+                        <p class="mb-0 text-muted small" style="line-height: 1.5;">${pesanEscaped}</p>
                     </div>
                 </div>
             </div>
@@ -449,7 +456,7 @@ function renderUcapan() {
 
     htmlSlider += '</div>';
     
-    // Masukin hasil kode slider-nya ke dalam HTML
+    // Cetak slidernya ke layar
     wadah.innerHTML = htmlSlider;
 }
 
