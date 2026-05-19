@@ -877,29 +877,22 @@ hr.divider-vintage {
     transition: opacity 0.2s ease;
 }
 
-
-/* ===== tambahan dikit
-/* --- SLIDER UCAPAN & DOA --- */
 .wadah-slider-ucapan {
     display: flex;
     overflow-x: auto;
     gap: 15px;
     padding-bottom: 15px;
-    
-    /* Smooth Scroll Native */
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    
-    /* Sembunyiin Scrollbar biar clean */
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
 }
 
 .wadah-slider-ucapan::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    display: none;
 }
 
 .item-ucapan-slider {
-    flex: 0 0 85%; /* Lebar item 85%, biar card sebelahnya ngintip dikit */
-    scroll-snap-align: center; /* Pas di-swipe, otomatis berhenti di tengah */
+    flex: 0 0 85%;
+    scroll-snap-align: center;
 }
