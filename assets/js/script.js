@@ -400,12 +400,12 @@ function formatTanggal(tglStr) {
     return date.toLocaleDateString('id-ID', options).replace(/\./g, ':');
 }
 
-// GANTI FUNGSI renderUcapan() JADI SEPERTI INI
+// --- FUNGSI RENDER UCAPAN (VERSI SLIDER / CAROUSEL) ---
 function renderUcapan() {
     const wadah = document.getElementById('daftarUcapan');
-    
-    // Kita hapus aja wadah pagination dari layar karena udah pake slider
     const wadahPagination = document.getElementById('wadahPagination');
+    
+    // Sembunyiin tombol Next/Prev karena kita pake swipe
     if (wadahPagination) {
         wadahPagination.style.display = 'none'; 
     }
@@ -417,13 +417,15 @@ function renderUcapan() {
         return;
     }
 
-    // Bikin div pembungkus slider-nya
+    // Ambil maksimal 20 ucapan terbaru biar HP tamu nggak nge-lag
+    const dataTerbaru = semuaUcapan.slice(0, 20); 
+
     let htmlSlider = '<div class="wadah-slider-ucapan">';
 
-    semuaUcapan.forEach(item => {
+    dataTerbaru.forEach(item => {
+        // Ambil huruf pertama buat avatar inisial
         const inisial = (item.nama ? item.nama.charAt(0) : 'A').toUpperCase();
         
-        // Perhatiin penambahan class 'item-ucapan-slider' di div paling luar
         htmlSlider += `
             <div class="item-ucapan-slider">
                 <div class="d-flex p-3 bg-white rounded-4 shadow-sm border h-100" style="border-color: rgba(140, 154, 131, 0.2) !important;">
@@ -446,6 +448,8 @@ function renderUcapan() {
     });
 
     htmlSlider += '</div>';
+    
+    // Masukin hasil kode slider-nya ke dalam HTML
     wadah.innerHTML = htmlSlider;
 }
 
