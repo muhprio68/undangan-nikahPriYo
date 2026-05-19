@@ -685,11 +685,12 @@ hr.divider-vintage {
 }
 
 .font-hashtag-banget {
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 300;
-    font-size: 1.3rem;
-    letter-spacing: 1px; 
-    color: #696060;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 1.6rem; /* Agak digedein dikit karena font italic serif biasanya kerasa lebih kecil */
+    letter-spacing: 1px; /* Spasi tipis biar bacanya enak dan elegan */
+    color: var(--warna-teks); /* Atau lu bisa ganti pake var(--warna-aksen-gelap) biar senada */
     margin-top: 15px;
     display: block;
 }
@@ -874,4 +875,31 @@ hr.divider-vintage {
 /* ===== GALERI: opacity transition saat ganti foto ===== */
 #fullViewImg {
     transition: opacity 0.2s ease;
+}
+
+
+/* ===== tambahan dikit
+/* --- SLIDER UCAPAN & DOA --- */
+.wadah-slider-ucapan {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding-bottom: 15px;
+    
+    /* Smooth Scroll Native */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    
+    /* Sembunyiin Scrollbar biar clean */
+    scrollbar-width: none; /* Firefox */
+}
+
+.wadah-slider-ucapan::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.item-ucapan-slider {
+    flex: 0 0 85%; /* Lebar item 85%, biar card sebelahnya ngintip dikit */
+    scroll-snap-align: center; /* Pas di-swipe, otomatis berhenti di tengah */
 }
