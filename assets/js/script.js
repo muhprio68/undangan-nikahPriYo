@@ -403,61 +403,50 @@ function formatTanggal(tglStr) {
 function renderUcapan() {
     const wadah = document.getElementById('daftarUcapan');
     const wadahPagination = document.getElementById('wadahPagination');
-    const skeleton = document.getElementById('skeletonUcapan');
 
-    // 1. Sembunyikan skeleton, tampilkan list (INI YANG BIKIN MUNCUL!)
-    if (skeleton) skeleton.style.display = 'none';
+    // Sembunyikan skeleton, tampilkan list
+    document.getElementById('skeletonUcapan').style.display = 'none';
     wadah.style.display = 'block';
     wadah.innerHTML = '';
 
-    // 2. Sembunyikan pagination karena kita pake sistem Slider/Swipe
-    if (wadahPagination) {
-        wadahPagination.classList.add('d-none');
-    }
-
-    // Kalau kosong
     if (!semuaUcapan || semuaUcapan.length === 0) {
         wadah.innerHTML = '<p class="text-muted small text-center mt-4">Belum ada ucapan. Jadilah yang pertama! 🌸</p>';
+        wadahPagination.classList.add('d-none');
         return;
     }
 
-    // 3. Batasi 20 ucapan terbaru biar HP nggak berat pas nge-swipe
-    const dataTerbaru = semuaUcapan.slice(0, 20);
+    const totalHalaman = Math.ceil(semuaUcapan.length / itemPerHalaman);
+    const indexMulai = (halamanSaatIni - 1) * itemPerHalaman;
+    const dataTampil = semuaUcapan.slice(indexMulai, indexMulai + itemPerHalaman);
 
-    let htmlSlider = '<div class="wadah-slider-ucapan">';
-
-    dataTerbaru.forEach(item => {
+    dataTampil.forEach(item => {
         const inisial = (item.nama ? item.nama.charAt(0) : 'A').toUpperCase();
-        
-        // 4. Pake escapeHtml bawaan kodingan lu biar aman dari hacker wkwk
         const namaEscaped = escapeHtml(item.nama || '');
         const pesanEscaped = escapeHtml(item.pesan || '');
 
-        htmlSlider += `
-            <div class="item-ucapan-slider">
-                <div class="d-flex p-3 bg-white rounded-4 shadow-sm border h-100" style="border-color: rgba(140, 154, 131, 0.2) !important;">
-                    <div class="flex-shrink-0">
-                        <div class="rounded-circle d-flex align-items-center justify-content-center border shadow-sm" 
-                             style="width: 45px; height: 45px; font-weight: bold; font-size: 1.3rem; color: #333; background-color: #f8f9fa; font-family: 'Playfair Display', Georgia, serif;">
-                            ${inisial}
-                        </div>
+        wadah.innerHTML += `
+            <div class="d-flex mb-3 p-3 bg-white rounded-4 shadow-sm border" style="border-color: rgba(140, 154, 131, 0.2) !important;">
+                <div class="flex-shrink-0">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center border shadow-sm" 
+                         style="width: 45px; height: 45px; font-weight: bold; font-size: 1.3rem; color: #333; background-color: #f8f9fa; font-family: 'Playfair Display', Georgia, serif;">
+                        ${inisial}
                     </div>
-                    <div class="ms-3 flex-grow-1 text-start">
-                        <h6 class="mb-0 fw-bold" style="color: var(--warna-teks);">${namaEscaped}</h6>
-                        <small class="text-muted" style="font-size: 0.7rem; display: block; margin-bottom: 8px;">
-                            <i class="bi bi-clock me-1"></i> ${formatTanggal(item.created_at)}
-                        </small>
-                        <p class="mb-0 text-muted small" style="line-height: 1.5;">${pesanEscaped}</p>
-                    </div>
+                </div>
+                <div class="ms-3 flex-grow-1">
+                    <h6 class="mb-0 fw-bold" style="color: var(--warna-teks);">${namaEscaped}</h6>
+                    <small class="text-muted" style="font-size: 0.7rem; display: block; margin-bottom: 8px;">
+                        <i class="bi bi-clock me-1"></i> ${formatTanggal(item.created_at)}
+                    </small>
+                    <p class="mb-0 text-muted small" style="line-height: 1.5;">${pesanEscaped}</p>
                 </div>
             </div>
         `;
     });
 
-    htmlSlider += '</div>';
-    
-    // Cetak slidernya ke layar
-    wadah.innerHTML = htmlSlider;
+    wadahPagination.classList.remove('d-none');
+    document.getElementById('infoHalaman').innerText = `Hal ${halamanSaatIni} / ${totalHalaman}`;
+    document.getElementById('btnPrev').disabled = (halamanSaatIni === 1);
+    document.getElementById('btnNext').disabled = (halamanSaatIni === totalHalaman);
 }
 
 // Escape HTML untuk keamanan tampilan (bukan sanitasi input, itu di backend)

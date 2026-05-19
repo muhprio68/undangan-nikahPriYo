@@ -871,28 +871,3 @@ hr.divider-vintage {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
 }
-
-/* ===== GALERI: opacity transition saat ganti foto ===== */
-#fullViewImg {
-    transition: opacity 0.2s ease;
-}
-
-.wadah-slider-ucapan {
-    display: flex;
-    overflow-x: auto;
-    gap: 15px;
-    padding-bottom: 15px;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-}
-
-.wadah-slider-ucapan::-webkit-scrollbar {
-    display: none;
-}
-
-.item-ucapan-slider {
-    flex: 0 0 85%;
-    scroll-snap-align: center;
-}
